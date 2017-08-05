@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <!--扫描控制器,当配置了它后,Spring会自动的到com.dingzhang.controller
+    下扫描带有@controller @service @component等注解等类,将他们自动实例化-->
+    <context:component-scan base-package="com.dingzhang.controller" />
+
+    <!--<mvc:annotation-driven /> 会自动注册DefaultAnnotationHandlerMapping与
+    AnnotationMethodHandlerAdapter 两个bean,它解决了一些@controllerz注解使用时的提前配置-->
+    <mvc:annotation-driven />
+
+    <!-- 配置拦截器 -->
+    <!--<mvc:interceptors>-->
+        <!--&lt;!&ndash; 多个拦截器，顺序执行 &ndash;&gt;-->
+        <!--&lt;!&ndash; 配置登陆拦截器 &ndash;&gt;-->
+
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<mvc:exclude-mapping path="/login.do"/>-->
+            <!--<mvc:exclude-mapping path="/user/login.do"/>-->
+            <!--<bean class="com.dingzhang.intertceptors.LoginIntertceptor"></bean>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+    <!--配置 页面控制器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp" />
+
+    </bean>
+
+</beans>
