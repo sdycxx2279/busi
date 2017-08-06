@@ -6,6 +6,8 @@
     <!--为team.xxu.model.*设置别名方便调用-->
     <typeAliases>
         <typeAlias alias="User" type="com.dingzhang.model.User"/>
+        <typeAlias alias="Enterprise" type="com.dingzhang.model.Enterprise"/>
+        <typeAlias alias="Menu" type="com.dingzhang.model.Menu"/>
     </typeAliases>
 
 

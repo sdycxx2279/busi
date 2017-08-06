@@ -15,9 +15,9 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class JumpController {
-    @RequestMapping("/ad")
+    @RequestMapping("/addEnterprise")
     String ad(){
-        return "ad";
+        return "addEnterprise";
     }
 
     @RequestMapping("/login")
@@ -29,7 +29,7 @@ public class JumpController {
     String login(HttpServletRequest request){
         HttpSession session = request.getSession();
         User loginUser = (User)session.getAttribute("LoginUser");
-        if(loginUser.getAd())
+        if(loginUser.getAd()!=0)
             return "ad";
         else
             return "index";

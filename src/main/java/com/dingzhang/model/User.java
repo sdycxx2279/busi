@@ -10,12 +10,12 @@ public class User {
     private String username;
     private String password;
     private String nickname;
-    private boolean ad;
+    private int ad;
 
     public User() {
     }
 
-    public User(String username, String password, String nickname, boolean ad) {
+    public User(String username, String password, String nickname, int ad) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
@@ -68,11 +68,11 @@ public class User {
         this.id = id;
     }
 
-    public boolean getAd() {
+    public int getAd() {
         return ad;
     }
 
-    public void setAd(boolean ad) {
+    public void setAd(int ad) {
         this.ad = ad;
     }
 }

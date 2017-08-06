@@ -15,16 +15,5 @@ public class UserDaoTest extends BaseTest {
     @Autowired
     private UserDao userDao;
 
-    @Test
-    public void testAdd() throws Exception {
-        User user = new User("111","123456","徐龙杰",true);
-        int a = userDao.addUser(user);
-        System.out.println(a);
-    }
 
-    @Test
-    public void testSelect() throws Exception {
-        User user = userDao.selectByName("111");
-        System.out.println(user.toString());
-    }
 }

@@ -3,6 +3,7 @@ package com.dingzhang.service.impl;
 import com.dingzhang.dao.UserDao;
 import com.dingzhang.model.User;
 import com.dingzhang.service.UserService;
+import com.dingzhang.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,9 @@ public class UserServiceImpl implements UserService {
         //对输入账号进行查询,取出数据库中保存对信息
         User user = userMapper.selectByName(username);
         if (user != null) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password))
+            String newPassword = MD5Util.MD5(password);
+            if (user.getUsername().equals(username) && user.getPassword().equals(newPassword))
+                user.setPassword(null);
                 return user;
         }
         return null;

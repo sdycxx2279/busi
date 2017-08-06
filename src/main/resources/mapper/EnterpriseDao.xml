@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dingzhang.dao.EnterpriseDao">
+    <resultMap id="resultListEnterprise" type="Enterprise">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="lng" property="lng"/>
+        <result column="lat" property="lat"/>
+        <result column="level" property="level"/>
+        <result column="leader" property="leader"/>
+        <result column="call_leader" property="call_leader"/>
+        <result column="photo_leader" property="photo_leader"/>
+        <result column="member" property="member"/>
+        <result column="call_member" property="call_member"/>
+        <result column="photo_member" property="photo_member"/>
+        <result column="boss" property="boss"/>
+        <result column="call_boss" property="call_boss"/>
+        <result column="photo_boss" property="photo_boss"/>
+        <result column="type" property="type"/>
+        <result column="deadline" property="deadline"/>
+        <result column="question1" property="question1"/>
+        <result column="question2" property="question2"/>
+        <result column="question3" property="question3"/>
+        <result column="question4" property="question4"/>
+        <result column="question5" property="question5"/>
+    </resultMap>
+    <select id="selectAll" resultMap="resultListEnterprise">
+        select * from enterprise
+    </select>
+
+    <insert id="addEnterprise" parameterType="Enterprise" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        enterprise
+        (name, lng, lat, level, leader, call_leader, photo_leader, member, call_member, photo_member, boss, call_boss, photo_boss,type, deadline, question1, question2, question3, question4, question5)
+        VALUES
+        (#{name}, #{lng}, #{lat}, #{level}, #{leader}, #{call_leader}, #{photo_leader}, #{member}, #{call_member}, #{photo_member}, #{boss}, #{call_boss}, #{photo_boss},#{type}, #{deadline}, #{question1}, #{question2}, #{question3}, #{question4}, #{question5})
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dingzhang.dao.MenuDao">
+    <resultMap id="resultListMenu" type="Menu">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parent_id"/>
+        <result column="status" property="status"/>
+        <result column="controller" property="controller"/>
+        <result column="method" property="method"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <select id="selectByParent_id" resultMap="resultListMenu">
+        select * from menu where parent_id=#{parent_id}
+    </select>
+
+</mapper>
