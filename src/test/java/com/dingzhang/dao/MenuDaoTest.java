@@ -3,6 +3,7 @@ package com.dingzhang.dao;
 import com.dingzhang.BaseTest;
 import com.dingzhang.model.Menu;
 import com.dingzhang.model.User;
+import com.dingzhang.service.MenuService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,9 +20,6 @@ public class MenuDaoTest extends BaseTest {
 
     @Test
     public void testSelect() throws Exception {
-       List<Menu> menus = menuMapper.selectByParent_id(1);
-        for(Menu menu : menus) {
-            System.out.println(menu.toString());
-        }
+
     }
 }

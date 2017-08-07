@@ -52,6 +52,6 @@
   </servlet-mapping>
   <!--用于设定默认首页-->
   <welcome-file-list>
-    <welcome-file>/WEB-INF/jsp/login.jsp</welcome-file>
+    <welcome-file>welcome.do</welcome-file>
   </welcome-file-list>
 </web-app>

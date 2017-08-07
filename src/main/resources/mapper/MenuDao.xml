@@ -12,8 +12,8 @@
         <result column="name" property="name"/>
     </resultMap>
 
-    <select id="selectByParent_id" resultMap="resultListMenu">
-        select * from menu where parent_id=#{parent_id}
+    <select id="selectByParent_idAndStatus" resultMap="resultListMenu">
+        select * from menu where parent_id=#{parent_id} and status  &lt;= #{status}
     </select>
 
 </mapper>

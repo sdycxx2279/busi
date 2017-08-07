@@ -22,9 +22,10 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectByName(username);
         if (user != null) {
             String newPassword = MD5Util.MD5(password);
-            if (user.getUsername().equals(username) && user.getPassword().equals(newPassword))
+            if (user.getPassword().equals(newPassword)) {
                 user.setPassword(null);
                 return user;
+            }
         }
         return null;
 
