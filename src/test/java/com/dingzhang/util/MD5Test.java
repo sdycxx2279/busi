@@ -12,6 +12,7 @@ import org.junit.Test;
 public class MD5Test extends BaseTest{
     @Test
     public void testAdd() throws Exception {
-       System.out.println(MD5Util.MD5("1"));
+        String str = "徐潇";
+        System.out.println(str.length());
     }
 }

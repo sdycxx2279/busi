@@ -2,6 +2,7 @@ package com.dingzhang.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author Xiao Xu
@@ -10,4 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/superad")
 public class SuperAdController {
+    @RequestMapping("/add")
+    public ModelAndView addUser(){
+        ModelAndView modelAndView = new ModelAndView("addUser");
+        return modelAndView;
+    }
 }

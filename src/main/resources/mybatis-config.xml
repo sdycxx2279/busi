@@ -8,6 +8,7 @@
         <typeAlias alias="User" type="com.dingzhang.model.User"/>
         <typeAlias alias="Enterprise" type="com.dingzhang.model.Enterprise"/>
         <typeAlias alias="Menu" type="com.dingzhang.model.Menu"/>
+        <typeAlias alias="Tag" type="com.dingzhang.model.Tag"/>
     </typeAliases>
 
 
