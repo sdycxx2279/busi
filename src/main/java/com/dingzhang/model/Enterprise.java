@@ -10,6 +10,7 @@ import java.util.Date;
 public class Enterprise {
     private int id;
     private String name;
+    private String description;
     private double lng;
     private double lat;
     private int level;
@@ -22,7 +23,6 @@ public class Enterprise {
     private String boss;
     private String call_boss;
     private String photo_boss;
-    //type=1代表企业环保 2代表畜牧养殖 3代表污水直排
     private int type;
     private Date deadline;
     private String question1;
@@ -34,8 +34,9 @@ public class Enterprise {
     public Enterprise() {
     }
 
-    public Enterprise(String name, double lng, double lat,int level, String leader, String call_leader, String photo_leader, String member, String call_member, String photo_member, String boss, String call_boss, String photo_boss, int type, Date deadline, String question1, String question2, String question3, String question4, String question5) {
+    public Enterprise(String name, String description,double lng, double lat,int level, String leader, String call_leader, String photo_leader, String member, String call_member, String photo_member, String boss, String call_boss, String photo_boss, int type, Date deadline, String question1, String question2, String question3, String question4, String question5) {
         this.name = name;
+        this.description = description;
         this.lng = lng;
         this.lat = lat;
         this.level = level;
@@ -55,6 +56,14 @@ public class Enterprise {
         this.question3 = question3;
         this.question4 = question4;
         this.question5 = question5;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {

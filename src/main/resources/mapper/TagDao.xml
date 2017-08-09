@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dingzhang.dao.UserDao">
+<mapper namespace="com.dingzhang.dao.TagDao">
     <resultMap id="TagList" type="Tag">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
@@ -12,7 +12,7 @@
         select * from tag
     </select>
 
-    <select id="selectById" resultType="Tag">
+    <select id="selectById" parameterType="int" resultType="Tag">
         select * from tag where id=#{id}
     </select>
 

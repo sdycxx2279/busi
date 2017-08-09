@@ -2,8 +2,12 @@ package com.dingzhang.service;
 
 import com.dingzhang.BaseTest;
 import com.dingzhang.model.User;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * @author Xiao Xu
@@ -15,9 +19,16 @@ public class UserServiceTest extends BaseTest {
     UserService userService;
 
     @Test
-    public void testLogin(){
-        User user = userService.login("111","1");
-        System.out.println(user);
+    public void testPage(){
+        Page page = PageHelper.startPage(0, 3, "id");
+
+        List<User> userList=userService.getUserList("5555");
+
+//        for(User u:userList){
+//            System.out.println(u.toString());
+//        }
+        System.out.println(page.getPages());
+        System.out.println(page.getPageNum());
     }
 
 }

@@ -17,21 +17,31 @@ public interface TagDao {
     List<Tag> selectAll();
 
     /**
-     *新增标签
+     * 新增标签
+     * @param tag
      * @return
      */
-    int addTag();
+    int addTag(Tag tag);
 
     /**
      *更新标签
+     * @param tag
      * @return
      */
-    int updateById();
+    int updateById(Tag tag);
 
     /**
      *删除标签
+     * @param id
      * @return
      */
-    int deleteById();
+    int deleteById(int id);
+
+    /**
+     * 通过id查询标签
+     * @param id
+     * @return
+     */
+    Tag selectById(int id);
 
 }

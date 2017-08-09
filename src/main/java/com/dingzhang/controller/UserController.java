@@ -54,4 +54,26 @@ public class UserController {
         }
         return modelAndView;
     }
+
+    //进入密码修改页面
+    @RequestMapping("/edit")
+    ModelAndView edit(){
+        ModelAndView modelAndView = new ModelAndView("editPass");
+
+        return modelAndView;
+    }
+
+    //进行密码修改
+    @RequestMapping("/editPassword")
+    ModelAndView editPassword(HttpServletRequest request,String oldPassword,String password){
+        ModelAndView modelAndView = new ModelAndView("editPass");
+
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("LoginUser");
+
+        int flag = userService.updatePassword(user.getId(),oldPassword,password);
+        modelAndView.addObject("flag",flag);
+
+        return modelAndView;
+    }
 }

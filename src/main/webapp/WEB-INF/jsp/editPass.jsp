@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: 26096
   Date: 2017/8/9
-  Time: 0:56
+  Time: 17:57
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -39,7 +39,7 @@
 <div class="page-content">
     <div class="page-header">
         <h1>
-            新建用户
+            修改密码
             <small>
                 <i class="icon-double-angle-right"></i>
             </small>
@@ -49,65 +49,44 @@
         <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->
 
-            <form class="form-horizontal" action="/superad/addUser.do" method="post" onsubmit="return send()">
-                <div class="form-group">
-                    <label readonly="" class="col-sm-3 control-label no-padding-right" for="form-field-1">用户名 </label>
-
-                    <div class="col-sm-9">
-                        <input  type="text" class="col-xs-10 col-sm-5" id="form-field-1" name="username"/>
-                        <span class="help-inline col-xs-12 col-sm-7">
-								<label class="middle">
-									<input class="ace" type="checkbox" id="id-disable-check" />
-								</label>
-                        </span>
-                    </div>
-                </div>
-                <div class="space-4"></div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 密码</label>
-
-                    <div class="col-sm-9">
-                        <input type="password" id="form-field-2" name="password" class="col-xs-10 col-sm-5" />
-                    </div>
-                </div>
-
-                <div class="space-4"></div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="repeat">
-                        重复密码</label>
-
-                    <div class="col-sm-9">
-                        <input type="password" id="repeat" class="col-xs-10 col-sm-5" />
-                    </div>
-                </div>
-
-                <div class="space-4"></div>
+            <form class="form-horizontal" action="/user/editPassword.do" method="post" onsubmit="return send()">
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-3">昵称</label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1">旧密码</label>
 
                     <div class="col-sm-9">
-                        <input class="input-sm" type="text" id="form-field-3" name="nickname"/>
+                        <input class="col-xs-10 col-sm-5" type="password" id="form-field-1" name="oldPassword"/>
                         <div class="space-2"></div>
 
-                        <div class="help-block" id="input-size-slider"></div>
                     </div>
                 </div>
 
-
+                <div class="space-4"></div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-4"> 用户权限
-                    </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-2">新密码</label>
 
                     <div class="col-sm-9">
-                        <select name="ad" id="form-field-4">
-                            <option value="3">----请选择----</option>
-                            <option value="0">普通用户</option>
-                            <option value="1">管理员</option>
-                            <option value="2">超级管理员</option>
-                        </select>
+                        <input class="col-xs-10 col-sm-5" type="password" id="form-field-2" name="password"/>
+                        <div class="space-2"></div>
+
                     </div>
                 </div>
+
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-3">重复新密码</label>
+
+                    <div class="col-sm-9">
+                        <input class="col-xs-10 col-sm-5" type="password" id="form-field-3" name="repeat"/>
+                        <div class="space-2"></div>
+
+                    </div>
+                </div>
+
+                <div class="space-4"></div>
+
+
+
 
 
                 <div class="clearfix form-actions">
@@ -131,58 +110,33 @@
 <script  type = "text/javascript" >
     var flag = '${flag}';
     if(flag==1)
-        alert("账号已被注册！");
-    else if(flag==-1)
-        alert("系统故障，请稍后再试！");
+        alert("密码修改成功");
+    else if (flag==3)
+        alert("系统错误");
+    else if(flag==2)
+        alert("旧密码输入错误");
     function send(){
-        var username = $("#form-field-1").val();
+        var oldpassword = $("#form-field-1").val();
         var password = $("#form-field-2").val();
-        var nickname = $("#form-field-3").val();
-        var ad = $("#form-field-4").val();
-        var repeat = $("#repeat").val();
-
-        if(username.length<3){
-            alert("用户名不得少于3个字符！");
+        var repeat = $("#form-field-3").val();
+        if(password.length>20){
+            alert("密码长度不得大于20个字符！");
+            return false;
+        }
+        if(oldpassword==""){
+            alert("旧密码不得为空！");
             return false;
         }
         if(password==""){
             alert("密码不得为空！");
             return false;
         }
-        if(nickname==""){
-            alert("昵称不得为空！");
-            return false;
-        }
-        if(username.length>20){
-            alert("用户名长度不得大于20个字符！");
-            return false;
-        }
-        if(password.length>20){
-            alert("密码长度不得大于20个字符！");
-            return false;
-        }
-        if(nickname.length>20){
-            alert("用户昵称长度不得大于20个字符！");
-            return false;
-        }
-        if (username.indexOf(" ") != -1) {
-            alert("用户名不得包含空格！");
-            return false;
-        }
         if (password.indexOf(" ") != -1) {
             alert("密码不得包含空格！");
             return false;
         }
-        if (nickname.indexOf(" ") != -1) {
-            alert("昵称不得包含空格！");
-            return false;
-        }
-        if(ad =="" || ad == "3"){
-            alert("请选择用户权限！");
-            return false;
-        }
-        if(repeat != password){
-            alert("两次密码输入不一致！");
+        if (password!=repeat) {
+            alert("两次新密码重复输入不一致！");
             return false;
         }
     }

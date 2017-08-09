@@ -3,8 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.dingzhang.dao.UserDao">
+    <resultMap id="UserList" type="User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="ad" property="ad"/>
+    </resultMap>
     <select id="selectByName" parameterType="string" resultType="User">
         select * from user where username = #{username}
+    </select>
+    <select id="selectById" parameterType="int" resultType="User">
+        select * from user where id = #{id}
+    </select>
+    <select id="selectAllUsers" resultMap="UserList">
+        select * from user
     </select>
 
     <insert id="addUser" parameterType="User">
@@ -14,5 +27,16 @@
         INSERT INTO user (username, password,nickname,ad) VALUES (#{username}, #{password},#{nickname},#{ad})
     </insert>
 
+    <update id="updateUser" parameterType="User">
+        UPDATE user
+        SET
+        password = #{password},
+        nickname = #{nickname},
+        ad=#{ad}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
 
 </mapper>

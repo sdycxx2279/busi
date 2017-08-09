@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -50,7 +49,7 @@
         <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->
 
-            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="/superad/editUser/${user.id}.do" method="post" onsubmit="return send()">
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-input-readonly">用户名 </label>
 
@@ -70,7 +69,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-2">昵称</label>
 
                     <div class="col-sm-9">
-                        <input class="input-sm" type="text" id="form-field-2" name="nickname"  placeholder="${user.nickname}" />
+                        <input class="input-sm" type="text" id="form-field-2" name="nickname"  value="${user.nickname}" />
                         <div class="space-2"></div>
 
                         <div class="help-block" id="input-size-slider"></div>
@@ -117,6 +116,24 @@
 </body>
 </html>
 <script  type = "text/javascript" >
-    var i = 2;
+    var i = ${user.ad};
     document.getElementById("form-field-3")[i].selected=true;
+    var flag = '${flag}';
+    if(flag == 1)
+        alert("系统故障，请稍后再试！");
+    function send(){
+        var nickname = $("#form-field-2").val();
+        if(nickname.length>20){
+            alert("用户昵称长度不得大于20个字符！");
+            return false;
+        }
+        if(nickname==""){
+            alert("昵称不得为空！");
+            return false;
+        }
+        if (nickname.indexOf(" ") != -1) {
+            alert("昵称不得包含空格！");
+            return false;
+        }
+    }
 </script>

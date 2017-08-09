@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: 26096
   Date: 2017/8/9
-  Time: 0:57
+  Time: 19:44
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -53,16 +53,16 @@
                         <div class="hr hr-18 dotted hr-double"></div>
                         <h4 class="pink">
                             <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
-                            <a href="#modal-table" role="button" class="green" data-toggle="modal"> 用户列表 </a>
+                            <a href="#modal-table" role="button" class="green" data-toggle="modal"> 企业类别列表 </a>
                         </h4>
                         <div class="hr hr-18 dotted hr-double"></div>
                         <div class="nav-search" id="nav-search">
-                            <form class="form-search">
-                                <span class="span_margin">用户名：</span></span><span class="input-icon">
-									<input type="text" placeholder="${username}" class="nav-search-input" id="userName-search-input" autocomplete="off" />
+                            <form class="form-search" action="/ad/addTag.do">
+                                <span class="span_margin">新增企业类别：</span></span><span class="input-icon">
+									<input type="text" class="nav-search-input" id="name" name="name"/>
 									<i class="icon-search nav-search-icon"></i>
 								</span>
-                                <input type="button" id="submit" class="submit_button" value="查询" onclick="searchByuserName()">
+                                <input type="submit" id="submit" class="submit_button" value="增加">
                             </form>
                         </div><!-- #nav-search -->
                         <div class="row">
@@ -72,32 +72,28 @@
                                     <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                                         <thead class="table-header">
                                         <tr>
-                                            <th class="center">用户编号</th>
-                                            <th>用户名</th>
-                                            <th>昵称</th>
-                                            <th>用户权限</th>
+                                            <th class="center">类型编号</th>
+                                            <th>类型名</th>
                                             <th>管理操作</th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        <c:forEach items="${userList}" var="item">
+                                        <c:forEach items="${tagList}" var="item">
                                             <tr>
                                                 <td class="center">
                                                         ${item.id}
                                                 </td>
 
-                                                <td>${item.username} </td>
-                                                <td>${item.nickname}</td>
-                                                <td>${item.ad}</td>
+                                                <td>${item.name} </td>
                                                 <td>
                                                     <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                                        <!-- 编辑用户信息操作 -->
-                                                        <a class="blue" href="/superad/userInfo/${item.id}.do">
+                                                        <!-- 编辑类别名称操作 -->
+                                                        <a class="blue" href="/ad/editTag/${item.id}.do">
                                                             <i class="icon-zoom-in bigger-130"></i>
                                                         </a>
-                                                        <!-- 删除用户信息操作 -->
-                                                        <a class="green" href="/superad/deleteUser/${item.id}.do" onclick="deleteUser()">
+                                                        <!-- 删除企业类别操作 -->
+                                                        <a class="green" href="/ad/deleteTag/${item.id}.do" onclick="deleteTag()">
                                                             <i class="icon-remove bigger-130"></i>
                                                         </a>
                                                     </div>
@@ -165,4 +161,4 @@
 
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
-<script src="assets/js/userIndex.js"></script>
+<script src="assets/js/tagInfo.js"></script>
