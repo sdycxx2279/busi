@@ -81,15 +81,25 @@
                                         </thead>
 
                                         <tbody>
-                                        <c:forEach items="${userList}" var="item">
+                                        <c:forEach items="${userList}" var="item" varStatus="status">
                                             <tr>
                                                 <td class="center">
-                                                        ${item.id}
+                                                        ${ status.index + 1+numofEveryPage*(currentPage-1)}
                                                 </td>
 
                                                 <td>${item.username} </td>
                                                 <td>${item.nickname}</td>
-                                                <td>${item.ad}</td>
+                                                <td>
+                                                    <c:if test="${item.ad == 2}">
+                                                        <c:out value="超级管理员"/>
+                                                    </c:if>
+                                                    <c:if test="${item.ad == 1}">
+                                                        <c:out value="管理员"/>
+                                                    </c:if>
+                                                    <c:if test="${item.ad == 0}">
+                                                        <c:out value="普通用户"/>
+                                                    </c:if>
+                                                </td>
                                                 <td>
                                                     <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                         <!-- 编辑用户信息操作 -->
@@ -97,7 +107,7 @@
                                                             <i class="icon-zoom-in bigger-130"></i>
                                                         </a>
                                                         <!-- 删除用户信息操作 -->
-                                                        <a class="green" href="/superad/deleteUser/${item.id}.do" onclick="deleteUser()">
+                                                        <a class="green" href="/superad/deleteUser/${item.id}.do" onclick="return deleteUser()">
                                                             <i class="icon-remove bigger-130"></i>
                                                         </a>
                                                     </div>

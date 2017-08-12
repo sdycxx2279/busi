@@ -48,9 +48,9 @@ function searchByuserName(){
 
 //设计删除确认弹窗
 function deleteUser(){
-	var msg = "删除操作无法恢复，您确定要删除该用户吗？";
-	if (confirm(msg)==true)
-		return true;
-	else
-		return false;	
+    var msg = "删除操作无法恢复，您确定要删除该用户吗？";
+    if (confirm(msg)==true)
+        return true;
+    else
+        return false;
 }

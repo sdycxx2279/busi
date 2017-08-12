@@ -1,8 +1,13 @@
 package com.dingzhang.controller;
 
-import com.dingzhang.model.MenuModel;
+import com.alibaba.fastjson.JSON;
+import com.dingzhang.entity.MenuModel;
+import com.dingzhang.model.Enterprise;
+import com.dingzhang.model.Tag;
 import com.dingzhang.model.User;
+import com.dingzhang.service.EnterpriseService;
 import com.dingzhang.service.MenuService;
+import com.dingzhang.service.TagService;
 import com.dingzhang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +28,16 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    MenuService menuService;
+    private MenuService menuService;
+
+    @Autowired
+    private EnterpriseService enterpriseService;
+
+    @Autowired
+    private TagService tagService;
 
     //登录系统
     @RequestMapping("/login")
@@ -73,6 +84,21 @@ public class UserController {
 
         int flag = userService.updatePassword(user.getId(),oldPassword,password);
         modelAndView.addObject("flag",flag);
+
+        return modelAndView;
+    }
+    //浏览企业概要
+    @RequestMapping("/allEnterprises")
+    ModelAndView getAllEnterprises(){
+        ModelAndView modelAndView = new ModelAndView("enterpriseMap");
+
+//        //获取并向页面传递用于地图的企业信息列表
+//        List<Enterprise> enterprises = enterpriseService.getEnterpriseList();
+//        modelAndView.addObject("enterpriseMap", JSON.toJSON(enterprises).toString());
+
+        //获取所有类别信息
+        List<Tag> typeList = tagService.getTagList();
+        modelAndView.addObject("typeList",typeList);
 
         return modelAndView;
     }

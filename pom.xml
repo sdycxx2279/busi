@@ -7,6 +7,15 @@
   <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
+          <plugin>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-maven-plugin</artifactId>
+            <version>1.3.2</version>
+            <configuration>
+              <verbose>true</verbose>
+              <overwrite>true</overwrite>
+            </configuration>
+          </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -15,7 +24,9 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+
         </plugins>
+      <finalName>busi</finalName>
     </build>
     <name>busi Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -26,9 +37,6 @@
   </properties>
   <dependencies>
     <dependency>
-
-
-
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
@@ -154,6 +162,11 @@
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-mapper-asl</artifactId>
       <version>1.9.13</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.1.37</version>
     </dependency>
     <!-- 文件上传 -->
     <dependency>

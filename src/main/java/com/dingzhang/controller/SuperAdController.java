@@ -1,5 +1,6 @@
 package com.dingzhang.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.dingzhang.model.User;
 import com.dingzhang.service.UserService;
 import com.dingzhang.util.PageUtil;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+
+import static com.dingzhang.constants.Constants.numofEveryPage;
 
 /**
  * @author Xiao Xu
@@ -52,10 +55,12 @@ public class SuperAdController {
         ModelAndView modelAndView = new ModelAndView("allUsers");
         currentPage = PageUtil.getCurrentPage(currentPage,allPages,type);
 
-        Page page = PageHelper.startPage(currentPage, 3, "id");
+        Page page = PageHelper.startPage(currentPage, numofEveryPage, "id");
         List<User> userList = userService.getUserList(userName);
 
-        modelAndView.addObject("userList",userList);
+        modelAndView.addObject("numofEveryPage",numofEveryPage);
+        modelAndView.addObject("userList", userList);
+        modelAndView.addObject("user", JSON.toJSON(userList).toString());
         //总页数
         allPages = page.getPages();
         modelAndView.addObject("allPages", allPages);

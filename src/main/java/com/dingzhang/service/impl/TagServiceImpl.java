@@ -1,5 +1,6 @@
 package com.dingzhang.service.impl;
 
+import com.dingzhang.dao.EnterpriseDao;
 import com.dingzhang.dao.TagDao;
 import com.dingzhang.model.Tag;
 import com.dingzhang.service.TagService;
@@ -16,6 +17,8 @@ import java.util.List;
 public class TagServiceImpl implements TagService{
     @Autowired
     private TagDao tagMapper;
+    @Autowired
+    private EnterpriseDao enterpriseDao;
 
     public List<Tag> getTagList(){
         List<Tag> tagList = tagMapper.selectAll();
@@ -33,7 +36,20 @@ public class TagServiceImpl implements TagService{
     public boolean deleteTag(int id){
         Tag tag = tagMapper.selectById(id);
         if(tag!=null){
-            if(tagMapper.deleteById(id)==1)
+            if(tagMapper.deleteById(id)==1){
+                //将所有具有该类别的企业置为空
+                enterpriseDao.updateType(id);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean updateTag(int id,String tagName){
+        Tag tag = tagMapper.selectById(id);
+        if(tag!=null){
+            tag.setName(tagName);
+            if(tagMapper.updateById(tag)==1)
                 return true;
         }
         return false;

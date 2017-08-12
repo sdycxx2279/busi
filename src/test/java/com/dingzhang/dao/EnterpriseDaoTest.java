@@ -2,10 +2,11 @@ package com.dingzhang.dao;
 
 import com.dingzhang.BaseTest;
 import com.dingzhang.model.Enterprise;
+import com.dingzhang.model.EnterpriseExample;
+import com.dingzhang.model.EnterpriseWithBLOBs;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class EnterpriseDaoTest extends BaseTest {
     @Autowired
-    EnterpriseDao enterpriseMapper;
+    private EnterpriseDao enterpriseDao;
 
     @Test
     public void testAdd() throws Exception {
@@ -24,9 +25,12 @@ public class EnterpriseDaoTest extends BaseTest {
 
     @Test
     public void testSelect() throws Exception {
-        List<Enterprise> enterprises = enterpriseMapper.selectAll();
+        EnterpriseExample example = new EnterpriseExample();
+        EnterpriseExample.Criteria  criteria = example.createCriteria();
+        criteria.andIdEqualTo(1);
+        List<EnterpriseWithBLOBs> enterprises = enterpriseDao.selectByExampleWithBLOBs(example);
         for(Enterprise enterprise:enterprises) {
-            System.out.println(enterprise.toString());
+            System.out.println(enterprise.getId());
         }
     }
 

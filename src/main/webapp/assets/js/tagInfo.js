@@ -41,3 +41,19 @@ function deleteTag(){
     else
         return false;
 }
+
+//弹出输入框修改类别名称
+function editTag(id,tagName){
+    var prom = "您希望将"+tagName+"修改为：";
+    var name=prompt(prom);
+    if (name == null || name == "") {
+        return false;
+    }
+    if(name.indexOf(" ") != -1){
+        alert("类别名不可包含空格！");
+        return false;
+    }
+
+    var src = "/ad/editTag/"+id+"/"+name+".do";
+    parent.changeIframe(src);
+}

@@ -1,6 +1,6 @@
 package com.dingzhang.service;
 
-import com.dingzhang.model.MenuModel;
+import com.dingzhang.entity.MenuModel;
 
 import java.util.List;
 

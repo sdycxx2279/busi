@@ -13,7 +13,7 @@
 %>
 <%
     //分页
-    //currentPage就是当前页，allPages表示的就是一共有多少页。这些在后面都会用到
+    //currentPage就是当前页，allPages表示的就是一共有多少页。numofEveryPage起到计数作用
     int currentPage = 0, allPages = 0;
     if (request.getAttribute("currentPage") != null) {
         currentPage = Integer.parseInt(request.getAttribute(
@@ -79,21 +79,21 @@
                                         </thead>
 
                                         <tbody>
-                                        <c:forEach items="${tagList}" var="item">
+                                        <c:forEach items="${tagList}" var="item" varStatus="status">
                                             <tr>
                                                 <td class="center">
-                                                        ${item.id}
+                                                        ${ status.index + 1+numofEveryPage*(currentPage-1)}
                                                 </td>
 
                                                 <td>${item.name} </td>
                                                 <td>
                                                     <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                         <!-- 编辑类别名称操作 -->
-                                                        <a class="blue" href="/ad/editTag/${item.id}.do">
+                                                        <a class="blue" href="javascript:void();" onclick="editTag('${item.id}','${item.name}')">
                                                             <i class="icon-zoom-in bigger-130"></i>
                                                         </a>
                                                         <!-- 删除企业类别操作 -->
-                                                        <a class="green" href="/ad/deleteTag/${item.id}.do" onclick="deleteTag()">
+                                                        <a class="green" href="/ad/deleteTag/${item.id}.do" onclick="return deleteTag()">
                                                             <i class="icon-remove bigger-130"></i>
                                                         </a>
                                                     </div>
@@ -143,6 +143,9 @@
 <!--[if !IE]> -->
 <script type="text/javascript">
     if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script type="text/javascript">
+
 </script>
 
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>

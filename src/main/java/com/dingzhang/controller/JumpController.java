@@ -1,6 +1,6 @@
 package com.dingzhang.controller;
 
-import com.dingzhang.model.MenuModel;
+import com.dingzhang.entity.MenuModel;
 import com.dingzhang.model.User;
 import com.dingzhang.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package com.dingzhang.service.impl;
 
 import com.dingzhang.dao.MenuDao;
 import com.dingzhang.model.Menu;
-import com.dingzhang.model.MenuModel;
+import com.dingzhang.entity.MenuModel;
 import com.dingzhang.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
