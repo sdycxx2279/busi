@@ -107,7 +107,7 @@
                                                             <i class="icon-zoom-in bigger-130"></i>
                                                         </a>
                                                         <!-- 删除用户信息操作 -->
-                                                        <a class="green" href="/superad/deleteUser/${item.id}.do" onclick="return deleteUser()">
+                                                        <a class="red" href="/superad/deleteUser/${item.id}.do" onclick="return deleteUser()">
                                                             <i class="icon-remove bigger-130"></i>
                                                         </a>
                                                     </div>

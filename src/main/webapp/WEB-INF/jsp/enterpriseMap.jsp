@@ -48,38 +48,38 @@
                         <div class="nav-search" id="nav-search">
                             <form class="form-search">
                                 <span class="span_margin">企业名：</span><span class="input-icon">
-                                <input type="text" placeholder="${name}" class="nav-search-input"
-                                       id="userName-search-input" autocomplete="off"/>
+                                <input type="text" value="${name}" class="nav-search-input"
+                                       id="name-search-input" autocomplete="off"/>
                                 <i class="icon-search nav-search-icon"></i>
                             </span>
                                 <span class="span_margin">网格长：</span><span class="input-icon">
-                                    <input type="text" placeholder="${leader}" class="nav-search-input"
+                                    <input type="text" value="${leader}" class="nav-search-input"
                                            id="leader-search-input" autocomplete="off"/>
                                     <i class="icon-search nav-search-icon"></i>
                                 </span>
                                 <span class="span_margin">网格员：</span><span class="input-icon">
-                                    <input type="text" placeholder="${member}" class="nav-search-input"
+                                    <input type="text" value="${member}" class="nav-search-input"
                                            id="member-search-input" autocomplete="off"/>
                                     <i class="icon-search nav-search-icon"></i>
                                 </span>
                                 <span class="span_margin">级别：</span><span class="input-icon">
                                 <select name="ad" id="level-search-input">
-                                    <option value="3">----请选择----</option>
-                                    <option value="0">红色</option>
-                                    <option value="1">黄色</option>
-                                    <option value="2">绿色</option>
+                                    <option value="0">----请选择----</option>
+                                    <option value="1">红色</option>
+                                    <option value="2">黄色</option>
+                                    <option value="3">绿色</option>
                                 </select>
                             </span>
                                 <span class="span_margin">截止日期：</span><span class="input-icon">
-                                <input type="date" placeholder="${deadline}" class="nav-search-input"
+                                <input type="date" value ="${deadline}" class="nav-search-input"
                                        id="deadline-search-input" autocomplete="off"/>
                                 <i class="icon-search nav-search-icon"></i>
                             </span>
                                 <span class="span_margin">企业类别：</span><span class="input-icon">
-                                <select name="ad" id="type-search-input">
-                                    <option value="-1">----请选择----</option>
+                                <select name="ad" id="tag-search-input">
+                                    <option value="0">----请选择----</option>
                                     <c:forEach items="${typeList}" var="type">
-                                        <option value="${type.id}">${type.name}</option>
+                                        <option value="${type.id}" <c:if test="${type.id==tag}"> selected = "selected"</c:if>>${type.name}</option>
                                     </c:forEach>
                                 </select>
                                 </span>
@@ -120,11 +120,14 @@
 
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
+<script src="assets/js/enterpriseMap.js"></script>
 
 <!-- Baidu Map API -->
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AP2WVpt74KyxycTt7BwhEFDpP3VG1NF9"></script>
 
 <script type="text/javascript">
+    var level = ${level};
+    document.getElementById("level-search-input")[level].selected=true;
     // 百度地图API功能
     var map = new BMap.Map("allmap");    // 创建Map实例
     map.centerAndZoom(new BMap.Point(116, 35.534523), 15);  // 初始化地图,设置中心点坐标和地图级别

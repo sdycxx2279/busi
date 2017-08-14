@@ -8,4 +8,7 @@ package com.dingzhang.constants;
 public class Constants {
     //分页每页项数
     public static final int numofEveryPage = 3;
+
+    //图片存放文件夹存放
+    public static final String uploadImageDir ="/upload";
 }

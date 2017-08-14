@@ -22,7 +22,7 @@ function dividePage(allPages, currentPage, flag) {
 }
 
 /**
- * 根据用户名进行查询
+ * 根据企业属性进行查询
  */
 function searchByProperties() {
     var src = "/ad/allEnterprises/0/1/previous";
@@ -31,12 +31,14 @@ function searchByProperties() {
 }
 
 //设计删除确认弹窗
-function deleteEnterprise() {
+function deleteEnterprise(id,allPages, currentPage, flag) {
     var msg = "删除操作无法恢复，您确定要删除该企业吗？";
-    if (confirm(msg) == true)
-        return true;
-    else
-        return false;
+    if (confirm(msg) == true){
+        var src = "/ad/deleteEnterprise/"+id +"/"+allPages+"/"+currentPage+"/"+flag;
+        src = src + getProperties();
+        parent.changeIframe(src)
+    }
+
 }
 
 function getProperties() {

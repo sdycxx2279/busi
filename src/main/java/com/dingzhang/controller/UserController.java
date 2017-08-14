@@ -11,6 +11,7 @@ import com.dingzhang.service.TagService;
 import com.dingzhang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -88,17 +89,52 @@ public class UserController {
         return modelAndView;
     }
     //浏览企业概要
-    @RequestMapping("/allEnterprises")
-    ModelAndView getAllEnterprises(){
+    @RequestMapping("/allEnterprises/{name}/{leader}/{member}/{level}/{deadline}/{tag}")
+    ModelAndView getAllEnterprises(@PathVariable(value="name") String name,
+                                   @PathVariable(value="leader") String leader,
+                                   @PathVariable(value="member") String member,
+                                   @PathVariable(value="level") int level ,
+                                   @PathVariable(value="deadline") String deadline,
+                                   @PathVariable(value="tag") int tag){
         ModelAndView modelAndView = new ModelAndView("enterpriseMap");
 
-//        //获取并向页面传递用于地图的企业信息列表
-//        List<Enterprise> enterprises = enterpriseService.getEnterpriseList();
-//        modelAndView.addObject("enterpriseMap", JSON.toJSON(enterprises).toString());
+        //获取并向页面传递用于地图的企业信息列表
+        List<Enterprise> enterprises = enterpriseService.getEnterpriseList(name,leader,member,level,deadline,tag);
+        modelAndView.addObject("enterpriseMap", JSON.toJSON(enterprises).toString());
 
         //获取所有类别信息
         List<Tag> typeList = tagService.getTagList();
         modelAndView.addObject("typeList",typeList);
+
+        //获取参数信息
+        if (!name.equals("1")) {
+            modelAndView.addObject("name", name);
+        } else {
+            modelAndView.addObject("name", "");
+        }
+        if (!leader.equals("1")) {
+            modelAndView.addObject("leader", leader);
+        } else {
+            modelAndView.addObject("leader", "");
+        }
+        if (!member.equals("1")) {
+            modelAndView.addObject("member", member);
+        } else {
+            modelAndView.addObject("member", "");
+        }
+        if (level!=0) {
+            modelAndView.addObject("level", level);
+        } else {
+            modelAndView.addObject("level", 0);
+        }if (!deadline.equals("1")) {
+            modelAndView.addObject("deadline", deadline);
+        } else {
+            modelAndView.addObject("deadline", "");
+        }if (tag!=-1) {
+            modelAndView.addObject("tag", tag);
+        } else {
+            modelAndView.addObject("tag", 0);
+        }
 
         return modelAndView;
     }

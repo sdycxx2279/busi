@@ -646,4 +646,10 @@
     type=0
     WHERE type=#{type}
   </update>
+  <delete id="deleteById" parameterType="int">
+    DELETE FROM enterprise WHERE id = #{id}
+  </delete>
+  <select id="selectById" parameterType="int" resultType="com.dingzhang.model.EnterpriseWithBLOBs">
+    SELECT * FROM enterprise WHERE id=#{id}
+  </select>
 </mapper>

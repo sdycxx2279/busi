@@ -92,7 +92,7 @@
                                 <select name="ad" id="tag-search-input">
                                     <option value="0">----请选择----</option>
                                     <c:forEach items="${typeList}" var="type">
-                                        <option value="${type.id}">${type.name}</option>
+                                        <option value="${type.id}" <c:if test="${type.id==tag}"> selected = "selected"</c:if>>${type.name}</option>
                                     </c:forEach>
                                 </select>
                                 </span>
@@ -125,11 +125,27 @@
                                                         ${item.name}
                                                 </td>
 
-                                                <td>${item.level} </td>
+                                                <td>
+                                                    <c:if test="${item.level==1}">
+                                                        <p style="color: red">红色</p>
+                                                    </c:if>
+                                                    <c:if test="${item.level==2}">
+                                                        <p style="color:yellow;">黄色</p>
+                                                    </c:if>
+                                                    <c:if test="${item.level==3}">
+                                                        <p style="color: green">绿色</p>
+                                                    </c:if>
+                                                </td>
                                                 <td>${item.boss}</td>
                                                 <td>${item.leader}</td>
                                                 <td>${item.member}</td>
-                                                <td>${item.type}</td>
+                                                <td>
+                                                    <c:forEach items="${typeList}" var="tag">
+                                                        <c:if test="${tag.id==item.type}">
+                                                            <c:out value="${tag.name}"/>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </td>
                                                 <td>
                                                     <fmt:formatDate pattern="yyyy-MM-dd" value="${item.deadline}"/>
                                                 </td>
@@ -140,7 +156,7 @@
                                                             <i class="icon-zoom-in bigger-130"></i>
                                                         </a>
                                                         <!-- 删除用户信息操作 -->
-                                                        <a class="green" href="" onclick="deleteEnterprise()">
+                                                        <a class="red" href="javascript:void();" onclick="deleteEnterprise(${item.id},${allPages},${currentPage},${currentPage})">
                                                             <i class="icon-remove bigger-130"></i>
                                                         </a>
                                                     </div>
@@ -155,7 +171,7 @@
                                                            onclick="dividePage('${allPages}','${currentPage}','first')">&nbsp;
                                                             首 页 &nbsp;</a>
                                                         <a href="javascript:void();"
-                                                           onclick="dividePage('${allPages}','${currentPage}','prveious')">&nbsp;&lt;&nbsp;
+                                                           onclick="dividePage('${allPages}','${currentPage}','previous')">&nbsp;&lt;&nbsp;
                                                             Prev &nbsp;</a>
                                                         <%
                                                             for (int i = currentPage - 2; i <= currentPage + 2
@@ -222,3 +238,11 @@
 <script src="assets/js/ace-elements.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/allEnterprises.js"></script>>
+
+<script type="text/javascript">
+    var level = ${level};
+    document.getElementById("level-search-input")[level].selected=true;
+    var message = ${message};
+    if(message==1)
+        alert("系统故障，请稍后再试！");
+</script>

@@ -121,4 +121,8 @@ public interface EnterpriseDao {
     int updateByPrimaryKey(Enterprise record);
 
     int updateType(int type);
+
+    int deleteById(int id);
+
+    EnterpriseWithBLOBs selectById(int id);
 }
