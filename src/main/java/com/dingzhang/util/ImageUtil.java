@@ -30,4 +30,14 @@ public class ImageUtil {
 
         return uploadImageDir+"/" + fileName;
     }
+
+    public static boolean deleteImage(String path){
+        File file = new File(path);
+        if(!file.exists())
+            return false;
+        else{
+            file.delete();
+            return true;
+        }
+    }
 }

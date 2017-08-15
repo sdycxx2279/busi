@@ -225,7 +225,77 @@ public class AdController {
         List<Tag> tagList = tagService.getTagList();
 
         modelAndView.addObject("enterprise",enterprise);
-        modelAndView.addObject("tagList",tagList);
+        modelAndView.addObject("typeList",tagList);
+
+        return modelAndView;
+    }
+
+    //查看可修改的企业详细信息
+    @RequestMapping("/editEnterprise/{id}")
+    public ModelAndView getEditEnterprise(@PathVariable("id")int id){
+        ModelAndView modelAndView = new ModelAndView("editEnterprise");
+
+        EnterpriseWithBLOBs enterprise = enterpriseService.getEnterprise(id);
+        List<Tag> tagList = tagService.getTagList();
+
+        modelAndView.addObject("enterprise",enterprise);
+        modelAndView.addObject("typeList",tagList);
+
+        String deadline = DateUtil.dateTimaFormat(enterprise.getDeadline());
+        modelAndView.addObject("deadline",deadline);
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/editEnterprisePost/{id}")
+    public ModelAndView editEnterprisePost(@PathVariable("id")int id,
+                                           HttpServletRequest request,EnterpriseWithBLOBs enterprise,
+                                           MultipartFile file1,MultipartFile file2,MultipartFile file3,String deadday){
+        ModelAndView modelAndView;
+
+        String path = request.getSession().getServletContext().getRealPath(uploadImageDir);
+        String deletePath = request.getSession().getServletContext().getRealPath("");
+        EnterpriseWithBLOBs oldEnterprise = enterpriseService.getEnterprise(id);
+        enterprise.setId(id);
+
+        if(file1.getSize()==0){
+            enterprise.setPhoto_boss(oldEnterprise.getPhoto_boss());
+        }else{
+            ImageUtil.deleteImage(deletePath+oldEnterprise.getPhoto_boss());
+            enterprise.setPhoto_boss(ImageUtil.uploadImage(path,file1));
+        }
+
+        if(file2.getSize()==0){
+            enterprise.setPhoto_leader(oldEnterprise.getPhoto_leader());
+        }else{
+            ImageUtil.deleteImage(deletePath+oldEnterprise.getPhoto_leader());
+            enterprise.setPhoto_leader(ImageUtil.uploadImage(path,file2));
+        }
+
+        if(file3.getSize()==0){
+            enterprise.setPhoto_member(oldEnterprise.getPhoto_member());
+        }else{
+            ImageUtil.deleteImage(deletePath+oldEnterprise.getPhoto_member());
+            enterprise.setPhoto_member(ImageUtil.uploadImage(path,file3));
+        }
+        enterprise.setDeadline(DateUtil.stringConvertDate(deadday));
+
+        if(enterpriseService.editEnterprise(enterprise)){
+            modelAndView = new ModelAndView("redirect:/ad/allEnterprises/0/1/previous/1/1/1/0/1/-1.do");
+        }
+        else{
+            modelAndView = new ModelAndView("editEnterprise");
+
+            List<Tag> tagList = tagService.getTagList();
+
+            modelAndView.addObject("enterprise",oldEnterprise);
+            modelAndView.addObject("typeList",tagList);
+
+            String deadline = DateUtil.dateTimaFormat(oldEnterprise.getDeadline());
+            modelAndView.addObject("deadline",deadline);
+
+            modelAndView.addObject("message",1);
+        }
 
         return modelAndView;
     }

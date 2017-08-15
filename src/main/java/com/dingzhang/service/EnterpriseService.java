@@ -44,4 +44,11 @@ public interface EnterpriseService {
      * @return
      */
     EnterpriseWithBLOBs getEnterprise(int id);
+
+    /**
+     * 更新企业信息
+     * @param enterprise
+     * @return
+     */
+    boolean editEnterprise(EnterpriseWithBLOBs enterprise);
 }

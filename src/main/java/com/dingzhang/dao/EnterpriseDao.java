@@ -125,4 +125,6 @@ public interface EnterpriseDao {
     int deleteById(int id);
 
     EnterpriseWithBLOBs selectById(int id);
+
+    int updateByIdWithBLOBs(EnterpriseWithBLOBs enterprise);
 }

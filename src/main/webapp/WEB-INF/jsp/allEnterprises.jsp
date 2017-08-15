@@ -30,7 +30,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>企业信息管理系统</title>
+    <title>丁里长镇政务电子管理系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -60,22 +60,22 @@
                         <div class="hr hr-18 dotted hr-double"></div>
                         <div class="nav-search" id="nav-search">
                             <form class="form-search">
-                                <span class="span_margin">企业名：</span></span><span class="input-icon">
+                                <span class="span_margin">企业名：</span><span class="input-icon">
                                 <input type="text" value="${name}" class="nav-search-input"
                                        id="name-search-input" autocomplete="off"/>
                                 <i class="icon-search nav-search-icon"></i>
                             </span>
-                                <span class="span_margin">网格长：</span></span><span class="input-icon">
+                                <span class="span_margin">网格长：</span><span class="input-icon">
                                     <input type="text" value="${leader}" class="nav-search-input"
                                            id="leader-search-input" autocomplete="off"/>
                                     <i class="icon-search nav-search-icon"></i>
                                 </span>
-                                <span class="span_margin">网格员：</span></span><span class="input-icon">
+                                <span class="span_margin">网格员：</span><span class="input-icon">
                                     <input type="text" value="${member}" class="nav-search-input"
                                            id="member-search-input" autocomplete="off"/>
                                     <i class="icon-search nav-search-icon"></i>
                                 </span>
-                                <span class="span_margin">级别：</span></span><span class="input-icon">
+                                <span class="span_margin">级别：</span><span class="input-icon">
                                 <select name="ad" id="level-search-input">
                                     <option value="0">----请选择----</option>
                                     <option value="1">红色</option>
@@ -83,12 +83,12 @@
                                     <option value="3">绿色</option>
                                 </select>
                             </span>
-                                <span class="span_margin">截止日期：</span></span><span class="input-icon">
+                                <span class="span_margin">截止日期：</span><span class="input-icon">
                                 <input type="date" value="${deadline}" class="nav-search-input"
                                        id="deadline-search-input" autocomplete="off"/>
                                 <i class="icon-search nav-search-icon"></i>
                             </span>
-                                <span class="span_margin">企业类别：</span></span><span class="input-icon">
+                                <span class="span_margin">企业类别：</span><span class="input-icon">
                                 <select name="ad" id="tag-search-input">
                                     <option value="0">----请选择----</option>
                                     <c:forEach items="${typeList}" var="type">
@@ -152,7 +152,7 @@
                                                 <td>
                                                     <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                         <!-- 编辑用户信息操作 -->
-                                                        <a class="blue" href="">
+                                                        <a class="blue" href="/ad/editEnterprise/${item.id}.do">
                                                             <i class="icon-zoom-in bigger-130"></i>
                                                         </a>
                                                         <!-- 删除用户信息操作 -->

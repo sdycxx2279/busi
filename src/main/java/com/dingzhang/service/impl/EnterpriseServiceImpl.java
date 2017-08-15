@@ -72,4 +72,13 @@ public class EnterpriseServiceImpl implements EnterpriseService{
 
         return enterpriseWithBLOBs;
     }
+
+    @Override
+    public  boolean editEnterprise(EnterpriseWithBLOBs enterprise){
+        int flag = enterpriseDao.updateByIdWithBLOBs(enterprise);
+        if(flag==1)
+            return true;
+        else
+            return false;
+    }
 }

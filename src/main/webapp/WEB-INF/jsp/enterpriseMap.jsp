@@ -17,7 +17,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>企业信息管理系统</title>
+    <title>丁里长镇政务电子管理系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -173,7 +173,7 @@
             +'<span style="width: 50px;display: inline-block;">级别：</span>' + point.level + '</li>'
             +'<li style="line-height: 26px;font-size: 15px;">'
             +'<span style="width: 50px;display: inline-block;">截止日期：</span>'+ point.deadline +'</li>'
-            +'<li style="line-height: 26px;font-size: 15px;"><span style="width: 50px;display: inline-block;">查看：</span><a href="'+point.id+'">详情</a></li>'
+            +'<li style="line-height: 26px;font-size: 15px;"><span style="width: 50px;display: inline-block;">查看：</span><a href="ad/enterpriseInfo/'+point.id+'.do">详情</a></li>'
             +'</ul>';
         var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
         thisMaker.openInfoWindow(infoWindow);   //图片加载完毕重绘infowindow

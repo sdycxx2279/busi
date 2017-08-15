@@ -15,7 +15,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>企业信息管理系统</title>
+    <title>丁里长镇政务电子管理系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -112,7 +112,6 @@
         </div>
     </div>
 </div>
-<script src="assets/js/base.js"></script>
 </body>
 </html>
 <script  type = "text/javascript" >
@@ -135,5 +134,8 @@
             alert("昵称不得包含空格！");
             return false;
         }
+    }
+    function goBack(){
+        self.location = document.referrer;
     }
 </script>

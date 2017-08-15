@@ -15,7 +15,7 @@
 <html>
 <head>
     <base href="<%=basePath%>">
-    <title>丁里长乡企业信息管理系统</title>
+    <title>丁里长镇政务电子管理系统</title>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
@@ -38,7 +38,7 @@
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand"> <small> <i
-                    class="icon-leaf"></i> 丁里长乡企业信息管理系统
+                    class="icon-leaf"></i> 丁里长镇政务电子管理系统
             </small>
             </a>
             <!-- /.brand -->

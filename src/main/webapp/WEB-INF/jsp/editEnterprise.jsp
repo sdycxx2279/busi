@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 26096
-  Date: 2017/8/5
-  Time: 11:34
+  Date: 2017/8/14
+  Time: 23:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -40,7 +40,7 @@
 <div class="page-content">
     <div class="page-header">
         <h1>
-            新建企业
+            编辑企业
             <small>
                 <i class="icon-double-angle-right"></i>
             </small>
@@ -50,12 +50,12 @@
         <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->
 
-            <form class="form-horizontal" action="/ad/addEnterprisePost.do" method="post" enctype="multipart/form-data" onsubmit="return send()">
+            <form class="form-horizontal" action="/ad/editEnterprisePost/${enterprise.id}.do" method="post" enctype="multipart/form-data" onsubmit="return send()">
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="name">企业名 </label>
 
                     <div class="col-sm-9">
-                        <input  type="text" class="col-xs-10 col-sm-5" placeholder="不得输入数字" id="name" name="name"/>
+                        <input  type="text" class="col-xs-10 col-sm-5" value="${enterprise.name}" id="name" name="name"/>
                     </div>
                 </div>
                 <div class="space-4"></div>
@@ -97,7 +97,7 @@
                         <select name="type" id="type">
                             <option value="0">----请选择----</option>
                             <c:forEach items="${typeList}" var="type">
-                                <option value="${type.id}">${type.name}</option>
+                                <option value="${type.id}" <c:if test="${type.id==enterprise.type}"> selected = "selected"</c:if>>${type.name}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -108,7 +108,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="boss">企业负责人姓名</label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="boss" name="boss" class="col-xs-10 col-sm-5" placeholder="不得输入纯数字"/>
+                        <input type="text" id="boss" name="boss" class="col-xs-10 col-sm-5" value="${enterprise.boss}"/>
                     </div>
                 </div>
                 <div class="space-4"></div>
@@ -117,13 +117,27 @@
                     <label class="col-sm-3 control-label no-padding-right" for="call_boss">企业负责人电话</label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="call_boss" name="call_boss" class="col-xs-10 col-sm-5" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"/>
+                        <input type="text" id="call_boss" name="call_boss" class="col-xs-10 col-sm-5"
+                               onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)"
+                               onblur="this.v();" value="${enterprise.call_boss}"/>
                     </div>
                 </div>
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="photo_boss">企业负责人照片</label>
+                    <label class="col-sm-3 control-label no-padding-right" for="photo_member">企业负责人照片</label>
+                    <div class="col-sm-9">
+                        <div>
+                            <div class="line">
+                                <img src="${enterprise.photo_boss}" style="width:100px;height:160px;" alt="企业负责人照片">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="photo_boss">修改</label>
                     <div class="col-sm-9">
                         <div>
                             <div class="line">
@@ -139,7 +153,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="leader">网格长姓名</label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="leader" name="leader" class="col-xs-10 col-sm-5" placeholder="不得输入纯数字" />
+                        <input type="text" id="leader" name="leader" class="col-xs-10 col-sm-5" value="${enterprise.leader}" />
                     </div>
                 </div>
                 <div class="space-4"></div>
@@ -148,13 +162,27 @@
                     <label class="col-sm-3 control-label no-padding-right" for="call_leader">网格长电话</label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="call_leader" name="call_leader" class="col-xs-10 col-sm-5" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"/>
+                        <input type="text" id="call_leader" name="call_leader" class="col-xs-10 col-sm-5"
+                               onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)"
+                               onblur="this.v();" value="${enterprise.call_leader}"/>
                     </div>
                 </div>
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="photo_leader">网格长照片</label>
+                    <label class="col-sm-3 control-label no-padding-right" for="photo_member">网格长照片</label>
+                    <div class="col-sm-9">
+                        <div>
+                            <div class="line">
+                                <img src="${enterprise.photo_leader}" style="width:100px;height:160px;" alt="网格长照片">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="photo_leader">修改</label>
                     <div class="col-sm-9">
                         <div>
                             <div class="line">
@@ -170,7 +198,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="member">网格员姓名</label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="member" name="member" class="col-xs-10 col-sm-5" placeholder="不得输入纯数字"/>
+                        <input type="text" id="member" name="member" class="col-xs-10 col-sm-5" value="${enterprise.member}"/>
                     </div>
                 </div>
                 <div class="space-4"></div>
@@ -179,13 +207,27 @@
                     <label class="col-sm-3 control-label no-padding-right" for="call_member">网格员电话</label>
 
                     <div class="col-sm-9">
-                        <input type="text" id="call_member" name="call_member" class="col-xs-10 col-sm-5" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"/>
+                        <input type="text" id="call_member" name="call_member" class="col-xs-10 col-sm-5"
+                               onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)"
+                               onblur="this.v();" value="${enterprise.call_member}"/>
                     </div>
                 </div>
                 <div class="space-4"></div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="photo_member">网格员照片</label>
+                    <div class="col-sm-9">
+                        <div>
+                            <div class="line">
+                                <img src="${enterprise.photo_member}" style="width:100px;height:160px;" alt="网格员照片">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="photo_member">修改</label>
                     <div class="col-sm-9">
                         <div>
                             <div class="line">
@@ -201,7 +243,7 @@
                     <label class="col-sm-3 control-label no-padding-right" for="deadline">整改截止日期</label>
 
                     <div class="col-sm-9">
-                        <input type="date" id="deadline" name="deadday"/>
+                        <input type="date" id="deadline" name="deadday" value="${deadline}"/>
                     </div>
                 </div>
                 <div class="space-4"></div>
@@ -275,6 +317,12 @@
                             <i class="icon-ok bigger-110"></i>
                             提交
                         </button>
+
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset" onclick="goBack()">
+                            <i class="icon-undo bigger-110"></i>
+                            取消
+                        </button>
                     </div>
                 </div>
 
@@ -296,4 +344,17 @@
 <!-- Baidu Map API -->
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AP2WVpt74KyxycTt7BwhEFDpP3VG1NF9"></script>
 
-<script type="text/javascript" src="assets/js/addEnterprise.js"></script>
+<script type="text/javascript">
+    var lng = ${enterprise.lng}
+    var lat = ${enterprise.lat}
+    var level = ${enterprise.level};
+    var message = '${message}';
+    var description = '${enterprise.description}';
+    var question1 = '${enterprise.question1}';
+    var question2 = '${enterprise.question2}';
+    var question3 = '${enterprise.question3}';
+    var question4 = '${enterprise.question4}';
+    var question5 = '${enterprise.question5}';
+</script>
+
+<script type="text/javascript" src="assets/js/editEnterprise.js"></script>

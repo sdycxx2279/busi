@@ -63,7 +63,10 @@ public class JumpController {
     }
 
     @RequestMapping("/test")
-    public String test() {
+    public String test(HttpServletRequest request) {
+        String path = request.getSession().getServletContext().getRealPath(uploadImageDir);
+        ImageUtil.deleteImage(path+"1");
+
         return "test";
     }
 
