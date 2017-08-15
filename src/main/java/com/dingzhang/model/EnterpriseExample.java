@@ -282,66 +282,6 @@ public class EnterpriseExample {
             return (Criteria) this;
         }
 
-        public Criteria andLngIsNull() {
-            addCriterion("lng is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngIsNotNull() {
-            addCriterion("lng is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngEqualTo(Double value) {
-            addCriterion("lng =", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngNotEqualTo(Double value) {
-            addCriterion("lng <>", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngGreaterThan(Double value) {
-            addCriterion("lng >", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngGreaterThanOrEqualTo(Double value) {
-            addCriterion("lng >=", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngLessThan(Double value) {
-            addCriterion("lng <", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngLessThanOrEqualTo(Double value) {
-            addCriterion("lng <=", value, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngIn(List<Double> values) {
-            addCriterion("lng in", values, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngNotIn(List<Double> values) {
-            addCriterion("lng not in", values, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngBetween(Double value1, Double value2) {
-            addCriterion("lng between", value1, value2, "lng");
-            return (Criteria) this;
-        }
-
-        public Criteria andLngNotBetween(Double value1, Double value2) {
-            addCriterion("lng not between", value1, value2, "lng");
-            return (Criteria) this;
-        }
-
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;
@@ -409,6 +349,66 @@ public class EnterpriseExample {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("name not between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngIsNull() {
+            addCriterion("lng is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngIsNotNull() {
+            addCriterion("lng is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngEqualTo(Double value) {
+            addCriterion("lng =", value, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngNotEqualTo(Double value) {
+            addCriterion("lng <>", value, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngGreaterThan(Double value) {
+            addCriterion("lng >", value, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngGreaterThanOrEqualTo(Double value) {
+            addCriterion("lng >=", value, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngLessThan(Double value) {
+            addCriterion("lng <", value, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngLessThanOrEqualTo(Double value) {
+            addCriterion("lng <=", value, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngIn(List<Double> values) {
+            addCriterion("lng in", values, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngNotIn(List<Double> values) {
+            addCriterion("lng not in", values, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngBetween(Double value1, Double value2) {
+            addCriterion("lng between", value1, value2, "lng");
+            return (Criteria) this;
+        }
+
+        public Criteria andLngNotBetween(Double value1, Double value2) {
+            addCriterion("lng not between", value1, value2, "lng");
             return (Criteria) this;
         }
 

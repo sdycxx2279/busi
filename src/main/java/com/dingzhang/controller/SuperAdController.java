@@ -24,7 +24,7 @@ import static com.dingzhang.constants.Constants.numofEveryPage;
 @RequestMapping("/superad")
 public class SuperAdController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping("/add")
     public ModelAndView add(){

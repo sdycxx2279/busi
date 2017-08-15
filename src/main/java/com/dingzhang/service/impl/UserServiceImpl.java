@@ -17,7 +17,7 @@ import java.util.List;
 @Service("UserService")
 public class UserServiceImpl implements UserService {
     @Autowired
-    UserDao userMapper;
+    private UserDao userMapper;
 
     //登录方法的实现,从jsp页面获取username与password
     public User login(String username, String password) {

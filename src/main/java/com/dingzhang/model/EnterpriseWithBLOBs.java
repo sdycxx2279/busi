@@ -1,4 +1,5 @@
 package com.dingzhang.model;
+
 import java.util.Date;
 
 public class EnterpriseWithBLOBs extends Enterprise {
@@ -56,8 +57,8 @@ public class EnterpriseWithBLOBs extends Enterprise {
      *
      * @mbggenerated
      */
-    public EnterpriseWithBLOBs(Integer id, Double lng, String name, Double lat, Integer level, String leader, String call_leader, String photo_leader, String member, String call_member, String photo_member, String boss, String call_boss, String photo_boss, Integer type, Date deadline, String description, String question1, String question2, String question3, String question4, String question5) {
-        super(id, lng, name, lat, level, leader, call_leader, photo_leader, member, call_member, photo_member, boss, call_boss, photo_boss, type, deadline);
+    public EnterpriseWithBLOBs(Integer id, String name, Double lng, Double lat, Integer level, String leader, String call_leader, String photo_leader, String member, String call_member, String photo_member, String boss, String call_boss, String photo_boss, Integer type, Date deadline, String description, String question1, String question2, String question3, String question4, String question5) {
+        super(id, name, lng, lat, level, leader, call_leader, photo_leader, member, call_member, photo_member, boss, call_boss, photo_boss, type, deadline);
         this.description = description;
         this.question1 = question1;
         this.question2 = question2;
@@ -218,17 +219,5 @@ public class EnterpriseWithBLOBs extends Enterprise {
      */
     public void setQuestion5(String question5) {
         this.question5 = question5 == null ? null : question5.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "EnterpriseWithBLOBs{" +
-                "description='" + description + '\'' +
-                ", question1='" + question1 + '\'' +
-                ", question2='" + question2 + '\'' +
-                ", question3='" + question3 + '\'' +
-                ", question4='" + question4 + '\'' +
-                ", question5='" + question5 + '\'' +
-                '}';
     }
 }

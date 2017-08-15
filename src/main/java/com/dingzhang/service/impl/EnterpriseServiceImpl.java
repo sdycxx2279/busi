@@ -9,9 +9,6 @@ import com.dingzhang.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,7 +46,7 @@ public class EnterpriseServiceImpl implements EnterpriseService{
     //根据id删除企业
     @Override
     public boolean deleteEnterprise(int id){
-        int flag = enterpriseDao.deleteById(id);
+        int flag = enterpriseDao.deleteByPrimaryKey(id);
         if(flag==1)
             return true;
         else
@@ -68,14 +65,14 @@ public class EnterpriseServiceImpl implements EnterpriseService{
     //根据id获取一条企业信息
     @Override
     public EnterpriseWithBLOBs getEnterprise(int id) {
-        EnterpriseWithBLOBs enterpriseWithBLOBs = enterpriseDao.selectById(id);
+        EnterpriseWithBLOBs enterpriseWithBLOBs = enterpriseDao.selectByPrimaryKey(id);
 
         return enterpriseWithBLOBs;
     }
 
     @Override
     public  boolean editEnterprise(EnterpriseWithBLOBs enterprise){
-        int flag = enterpriseDao.updateByIdWithBLOBs(enterprise);
+        int flag = enterpriseDao.updateByPrimaryKeyWithBLOBs(enterprise);
         if(flag==1)
             return true;
         else

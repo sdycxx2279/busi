@@ -33,9 +33,8 @@ import static com.dingzhang.constants.Constants.uploadImageDir;
 
 @Controller
 public class JumpController {
-    public static final Resource PICTURES_DIR = new FileSystemResource("./load");
     @Autowired
-    MenuService menuService;
+    private  MenuService menuService;
 
     @RequestMapping("/quit")
     public ModelAndView quit(HttpServletRequest request) {

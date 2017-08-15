@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class MenuServiceImpl implements MenuService{
     @Autowired
-    MenuDao menuMapper;
+    private MenuDao menuMapper;
 
     @Override
     public List<MenuModel> getDisplayMenu(int status) {

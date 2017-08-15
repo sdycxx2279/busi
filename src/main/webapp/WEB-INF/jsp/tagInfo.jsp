@@ -5,7 +5,7 @@
   Time: 19:44
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
@@ -93,7 +93,7 @@
                                                             <i class="icon-zoom-in bigger-130"></i>
                                                         </a>
                                                         <!-- 删除企业类别操作 -->
-                                                        <a class="green" href="/ad/deleteTag/${item.id}.do" onclick="return deleteTag()">
+                                                        <a class="red" href="/ad/deleteTag/${item.id}.do" onclick="return deleteTag()">
                                                             <i class="icon-remove bigger-130"></i>
                                                         </a>
                                                     </div>
@@ -105,7 +105,7 @@
                                                 <c:if test="${allPages>1}">
                                                     <div align="right" class="viciao">
                                                         <a href="javascript:void();" onclick="dividePage('${allPages}','${currentPage}','first')">&nbsp; 首 页 &nbsp;</a>
-                                                        <a href="javascript:void();"onclick="dividePage('${allPages}','${currentPage}','previous')">&nbsp;&lt;&nbsp; Prev &nbsp;</a>
+                                                        <a href="javascript:void();" onclick="dividePage('${allPages}','${currentPage}','previous')">&nbsp;&lt;&nbsp; Prev &nbsp;</a>
                                                         <%
                                                             for (int i = currentPage - 2; i <= currentPage + 2 && i <= allPages; i++) {
                                                                 if (currentPage == i) {
