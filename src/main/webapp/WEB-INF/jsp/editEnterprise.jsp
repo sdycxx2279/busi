@@ -16,7 +16,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>丁里长镇政务电子管理系统</title>
+    <title>丁里长镇党务政务电子管理系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -40,7 +40,7 @@
 <div class="page-content">
     <div class="page-header">
         <h1>
-            编辑企业
+            编辑单位
             <small>
                 <i class="icon-double-angle-right"></i>
             </small>
@@ -52,7 +52,7 @@
 
             <form class="form-horizontal" action="/ad/editEnterprisePost/${enterprise.id}.do" method="post" enctype="multipart/form-data" onsubmit="return send()">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="name">企业名 </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="name">单位名 </label>
 
                     <div class="col-sm-9">
                         <input  type="text" class="col-xs-10 col-sm-5" value="${enterprise.name}" id="name" name="name"/>
@@ -61,7 +61,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right">企业位置 </label>
+                    <label class="col-sm-3 control-label no-padding-right">单位位置 </label>
 
                     <div class="col-sm-9">
                         <div id="l-map" style="height:300px;width:100%;"></div>
@@ -90,7 +90,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="type"> 企业类型
+                    <label class="col-sm-3 control-label no-padding-right" for="type"> 单位类型
                     </label>
 
                     <div class="col-sm-9">
@@ -105,7 +105,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="boss">企业负责人姓名</label>
+                    <label class="col-sm-3 control-label no-padding-right" for="boss">单位负责人姓名</label>
 
                     <div class="col-sm-9">
                         <input type="text" id="boss" name="boss" class="col-xs-10 col-sm-5" value="${enterprise.boss}"/>
@@ -114,7 +114,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="call_boss">企业负责人电话</label>
+                    <label class="col-sm-3 control-label no-padding-right" for="call_boss">单位负责人电话</label>
 
                     <div class="col-sm-9">
                         <input type="text" id="call_boss" name="call_boss" class="col-xs-10 col-sm-5"
@@ -125,11 +125,11 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="photo_member">企业负责人照片</label>
+                    <label class="col-sm-3 control-label no-padding-right" for="photo_member">单位负责人照片</label>
                     <div class="col-sm-9">
                         <div>
                             <div class="line">
-                                <img src="${enterprise.photo_boss}" style="width:100px;height:160px;" alt="企业负责人照片">
+                                <img src="${enterprise.photo_boss}" style="width:100px;height:160px;" alt="单位负责人照片">
                             </div>
                         </div>
                     </div>
@@ -249,7 +249,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right">企业描述</label>
+                    <label class="col-sm-3 control-label no-padding-right">单位描述</label>
 
                     <div class="col-sm-9">
                         <script id="description" type="text/plain"></script>
@@ -355,6 +355,33 @@
     var question3 = '${enterprise.question3}';
     var question4 = '${enterprise.question4}';
     var question5 = '${enterprise.question5}';
+    //初始化ueditor编辑器
+    var ue1 = UE.getEditor('description');
+    var ue2 = UE.getEditor('question1');
+    var ue3 = UE.getEditor('question2');
+    var ue4 = UE.getEditor('question3');
+    var ue5 = UE.getEditor('question4');
+    var ue6 = UE.getEditor('question5');
+
+    //为富文本编辑框赋值
+    ue1.ready(function() {
+        ue1.setContent(description);
+    });
+    ue2.ready(function() {
+        ue2.setContent(question1);
+    });
+    ue3.ready(function() {
+        ue3.setContent(question2);
+    });
+    ue4.ready(function() {
+        ue4.setContent(question3);
+    });
+    ue5.ready(function() {
+        ue5.setContent(question4);
+    });
+    ue6.ready(function() {
+        ue6.setContent(question5);
+    });
 </script>
 
 <script type="text/javascript" src="assets/js/editEnterprise.js"></script>

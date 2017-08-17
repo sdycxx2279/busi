@@ -1,36 +1,9 @@
-
-document.getElementById("level")[level].selected=true;
+ document.getElementById("level")[level].selected=true;
 
 if(message==1){
     alert("系统错误，请稍后再试！");
 }
-//初始化ueditor编辑器
-var ue1 = UE.getEditor('description');
-var ue2 = UE.getEditor('question1');
-var ue3 = UE.getEditor('question2');
-var ue4 = UE.getEditor('question3');
-var ue5 = UE.getEditor('question4');
-var ue6 = UE.getEditor('question5');
 
-//为富文本编辑框赋值
-ue1.ready(function() {
-    ue1.setContent(description);
-});
-ue2.ready(function() {
-    ue2.setContent(question1);
-});
-ue3.ready(function() {
-    ue3.setContent(question2);
-});
-ue4.ready(function() {
-    ue4.setContent(question3);
-});
-ue5.ready(function() {
-    ue5.setContent(question4);
-});
-ue6.ready(function() {
-    ue6.setContent(question5);
-});
 
 // 百度地图API功能
 var map = new BMap.Map("l-map");    // 创建Map实例

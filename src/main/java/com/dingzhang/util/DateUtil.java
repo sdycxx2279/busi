@@ -60,4 +60,11 @@ public class DateUtil {
         }
         return date1;
     }
+
+    public static String dateToFileName(){
+        Date date = new Date();
+        SimpleDateFormat sdf =  new SimpleDateFormat("yyyyMMddHHmmss");
+        String str=sdf.format(date);
+        return str;
+    }
 }

@@ -17,7 +17,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>丁里长镇政务电子管理系统</title>
+    <title>丁里长镇党务政务电子管理系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -42,12 +42,12 @@
                         <div class="hr hr-18 dotted hr-double"></div>
                         <h4 class="pink">
                             <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
-                            <a href="#modal-table" role="button" class="green" data-toggle="modal"> 企业分布 </a>
+                            <a href="#modal-table" role="button" class="green" data-toggle="modal"> 单位分布 </a>
                         </h4>
                         <div class="hr hr-18 dotted hr-double"></div>
                         <div class="nav-search" id="nav-search">
                             <form class="form-search">
-                                <span class="span_margin">企业名：</span><span class="input-icon">
+                                <span class="span_margin">单位名：</span><span class="input-icon">
                                 <input type="text" value="${name}" class="nav-search-input"
                                        id="name-search-input" autocomplete="off"/>
                                 <i class="icon-search nav-search-icon"></i>
@@ -75,7 +75,7 @@
                                        id="deadline-search-input" autocomplete="off"/>
                                 <i class="icon-search nav-search-icon"></i>
                             </span>
-                                <span class="span_margin">企业类别：</span><span class="input-icon">
+                                <span class="span_margin">单位类别：</span><span class="input-icon">
                                 <select name="ad" id="tag-search-input">
                                     <option value="0">----请选择----</option>
                                     <c:forEach items="${typeList}" var="type">
@@ -150,6 +150,9 @@
         for(var i = 0,pointsLen = points.length;i <pointsLen;i++){
             var point = new BMap.Point(points[i].lng,points[i].lat);
             var  marker = new BMap.Marker(point);
+            if(points[i].level==1){
+                marker.setAnimation(BMAP_ANIMATION_BOUNCE); //弹跳效果
+            }
             map.addOverlay(marker);
             //给标注点添加点击事件。使用立即执行函数和闭包
             (function() {
@@ -166,7 +169,7 @@
         var sContent =
             '<ul style="margin:0 0 5px 0;padding:0.2em 0">'
             +'<li style="line-height: 26px;font-size: 15px;">'
-            +'<span style="width: 50px;display: inline-block;">企业名：</span>' + point.name + '</li>'
+            +'<span style="width: 50px;display: inline-block;">单位名：</span>' + point.name + '</li>'
             +'<li style="line-height: 26px;font-size: 15px;">'
             +'<span style="width: 50px;display: inline-block;">类别：</span>' + point.type + '</li>'
             +'<li style="line-height: 26px;font-size: 15px;">'

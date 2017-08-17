@@ -16,7 +16,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>丁里长镇政务电子管理系统</title>
+    <title>丁里长镇党务政务电子管理系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -40,7 +40,7 @@
 <div class="page-content">
     <div class="page-header">
         <h1>
-            新建企业
+            新建单位
             <small>
                 <i class="icon-double-angle-right"></i>
             </small>
@@ -52,7 +52,7 @@
 
             <form class="form-horizontal" action="/ad/addEnterprisePost.do" method="post" enctype="multipart/form-data" onsubmit="return send()">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="name">企业名 </label>
+                    <label class="col-sm-3 control-label no-padding-right" for="name">单位名 </label>
 
                     <div class="col-sm-9">
                         <input  type="text" class="col-xs-10 col-sm-5" placeholder="不得输入数字" id="name" name="name"/>
@@ -61,7 +61,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right">企业位置 </label>
+                    <label class="col-sm-3 control-label no-padding-right">单位位置 </label>
 
                     <div class="col-sm-9">
                         <div id="l-map" style="height:300px;width:100%;"></div>
@@ -90,7 +90,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="type"> 企业类型
+                    <label class="col-sm-3 control-label no-padding-right" for="type"> 单位类型
                     </label>
 
                     <div class="col-sm-9">
@@ -105,7 +105,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="boss">企业负责人姓名</label>
+                    <label class="col-sm-3 control-label no-padding-right" for="boss">单位负责人姓名</label>
 
                     <div class="col-sm-9">
                         <input type="text" id="boss" name="boss" class="col-xs-10 col-sm-5" placeholder="不得输入纯数字"/>
@@ -114,7 +114,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="call_boss">企业负责人电话</label>
+                    <label class="col-sm-3 control-label no-padding-right" for="call_boss">单位负责人电话</label>
 
                     <div class="col-sm-9">
                         <input type="text" id="call_boss" name="call_boss" class="col-xs-10 col-sm-5" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)" onblur="this.v();"/>
@@ -123,7 +123,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="photo_boss">企业负责人照片</label>
+                    <label class="col-sm-3 control-label no-padding-right" for="photo_boss">单位负责人照片</label>
                     <div class="col-sm-9">
                         <div>
                             <div class="line">
@@ -207,7 +207,7 @@
                 <div class="space-4"></div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right">企业描述</label>
+                    <label class="col-sm-3 control-label no-padding-right">单位描述</label>
 
                     <div class="col-sm-9">
                         <script id="description" type="text/plain"></script>

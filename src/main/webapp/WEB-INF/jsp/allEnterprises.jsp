@@ -30,7 +30,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>丁里长镇政务电子管理系统</title>
+    <title>丁里长镇党务政务电子管理系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -55,12 +55,12 @@
                         <div class="hr hr-18 dotted hr-double"></div>
                         <h4 class="pink">
                             <i class="icon-hand-right icon-animated-hand-pointer blue"></i>
-                            <a href="#modal-table" role="button" class="green" data-toggle="modal"> 企业列表 </a>
+                            <a href="#modal-table" role="button" class="green" data-toggle="modal"> 单位列表 </a>
                         </h4>
                         <div class="hr hr-18 dotted hr-double"></div>
                         <div class="nav-search" id="nav-search">
                             <form class="form-search">
-                                <span class="span_margin">企业名：</span><span class="input-icon">
+                                <span class="span_margin">单位名：</span><span class="input-icon">
                                 <input type="text" value="${name}" class="nav-search-input"
                                        id="name-search-input" autocomplete="off"/>
                                 <i class="icon-search nav-search-icon"></i>
@@ -88,7 +88,7 @@
                                        id="deadline-search-input" autocomplete="off"/>
                                 <i class="icon-search nav-search-icon"></i>
                             </span>
-                                <span class="span_margin">企业类别：</span><span class="input-icon">
+                                <span class="span_margin">单位类别：</span><span class="input-icon">
                                 <select name="ad" id="tag-search-input">
                                     <option value="0">----请选择----</option>
                                     <c:forEach items="${typeList}" var="type">
@@ -107,12 +107,12 @@
                                     <table id="sample-table-2" class="table table-striped table-bordered table-hover">
                                         <thead class="table-header">
                                         <tr>
-                                            <th class="center">企业名</th>
+                                            <th class="center">单位名</th>
                                             <th>级别</th>
                                             <th>负责人</th>
                                             <th>网格长</th>
                                             <th>网格员</th>
-                                            <th>企业类别</th>
+                                            <th>单位类别</th>
                                             <th>截止日期</th>
                                             <th>管理操作</th>
                                         </tr>

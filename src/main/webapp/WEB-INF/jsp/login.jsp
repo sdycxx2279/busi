@@ -35,7 +35,7 @@
                 <div class="card card-signup">
                     <form class="form" method="post" action="/user/login.do">
                         <div class="header header-primary text-center">
-                            <h4 style="margin:30px">丁里长镇政务电子管理系统</h4>
+                            <h4 style="margin:30px">丁里长镇党务政务电子管理系统</h4>
                             <div style="text-align: center;color:#F00">
                                 ${message}
                             </div>

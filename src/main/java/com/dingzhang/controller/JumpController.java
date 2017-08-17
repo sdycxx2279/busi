@@ -1,9 +1,12 @@
 package com.dingzhang.controller;
 
 import com.dingzhang.entity.MenuModel;
+import com.dingzhang.model.EnterpriseWithBLOBs;
 import com.dingzhang.model.User;
+import com.dingzhang.service.EnterpriseService;
 import com.dingzhang.service.MenuService;
 import com.dingzhang.util.ImageUtil;
+import com.dingzhang.util.QiniuUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.List;
 
+import static com.dingzhang.constants.Constants.QINIU_IMAGE_URL;
 import static com.dingzhang.constants.Constants.uploadImageDir;
 
 
@@ -35,6 +39,8 @@ import static com.dingzhang.constants.Constants.uploadImageDir;
 public class JumpController {
     @Autowired
     private  MenuService menuService;
+    @Autowired
+    private EnterpriseService enterpriseService;
 
     @RequestMapping("/quit")
     public ModelAndView quit(HttpServletRequest request) {
@@ -63,9 +69,12 @@ public class JumpController {
 
     @RequestMapping("/test")
     public String test(HttpServletRequest request) {
-        String path = request.getSession().getServletContext().getRealPath(uploadImageDir);
-        ImageUtil.deleteImage(path+"1");
-
+        EnterpriseWithBLOBs enterpriseWithBLOBs = enterpriseService.getEnterprise(6);
+        String path = request.getSession().getServletContext().getRealPath("");
+        String ques = QiniuUtil.uploadHtmlImage(path,enterpriseWithBLOBs.getQuestion1());
+        System.out.println(ques);
+        //enterpriseWithBLOBs.setQuestion1(ques);
+        //enterpriseService.editEnterprise(enterpriseWithBLOBs);
         return "test";
     }
 
@@ -73,10 +82,15 @@ public class JumpController {
     public String upload(MultipartFile file, HttpServletRequest request, ModelMap model) {
 
         System.out.println("开始");
-        String path = request.getSession().getServletContext().getRealPath(uploadImageDir);
-        String url = ImageUtil.uploadImage(path,file);
+        if(QiniuUtil.uploadImage(file,"test1")){
+            String path = QINIU_IMAGE_URL +"test1";
+            System.out.println(file.getContentType());
+            model.addAttribute("fileUrl", path);
+        }
+//        String path = request.getSession().getServletContext().getRealPath(uploadImageDir);
+//        String url = ImageUtil.uploadImage(path,file);
 
-        model.addAttribute("fileUrl", request.getContextPath()+url);
+
 
         return "result";
     }

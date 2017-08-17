@@ -17,7 +17,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>丁里长镇政务电子管理系统</title>
+    <title>丁里长镇党务政务电子管理系统</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -40,7 +40,7 @@
 <div class="page-content">
     <div class="page-header">
         <h1>
-            企业详情 <small> <i class="icon-double-angle-right"></i></small>
+            单位详情 <small> <i class="icon-double-angle-right"></i></small>
         </h1>
     </div>
     <!-- /.page-header -->
@@ -54,14 +54,14 @@
 
                     <div class="profile-user-info profile-user-info-striped">
                         <div class="profile-info-row">
-                            <div class="profile-info-name">企业名称</div>
+                            <div class="profile-info-name">单位名称</div>
                             <div class="profile-info-value">
                                 <span class="editable" id="name">${enterprise.name}</span>
                             </div>
                         </div>
 
                         <div class="profile-info-row">
-                            <div class="profile-info-name">企业简介</div>
+                            <div class="profile-info-name">单位简介</div>
 
                             <div class="profile-info-value">
                                 ${enterprise.description}
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="profile-info-row">
-                            <div class="profile-info-name">企业位置</div>
+                            <div class="profile-info-name">单位位置</div>
 
                             <div class="profile-info-value">
                                 <div id="map" style="height:300px;width:100%;"></div>
@@ -92,7 +92,7 @@
                         </div>
 
                         <div class="profile-info-row">
-                            <div class="profile-info-name">企业类型</div>
+                            <div class="profile-info-name">单位类型</div>
 
                             <div class="profile-info-value">
                                 <c:forEach items="${typeList}" var="tag">
@@ -111,21 +111,21 @@
                         </div>
 
                         <div class="profile-info-row">
-                            <div class="profile-info-name">企业负责人姓名</div>
+                            <div class="profile-info-name">单位负责人姓名</div>
                             <div class="profile-info-value">
                                 ${enterprise.boss}
                             </div>
                         </div>
 
                         <div class="profile-info-row">
-                            <div class="profile-info-name">企业负责人电话</div>
+                            <div class="profile-info-name">单位负责人电话</div>
                             <div class="profile-info-value">
                                 ${enterprise.call_boss}
                             </div>
                         </div>
 
                         <div class="profile-info-row">
-                            <div class="profile-info-name">企业负责人照片</div>
+                            <div class="profile-info-name">单位负责人照片</div>
                             <div class="profile-info-value">
                                 <div style="width:50px;height:100px">
                                     <img style="width:100%;height:100%" src="${enterprise.photo_boss}">

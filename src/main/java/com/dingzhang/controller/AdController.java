@@ -3,11 +3,13 @@ package com.dingzhang.controller;
 import com.dingzhang.model.Enterprise;
 import com.dingzhang.model.EnterpriseWithBLOBs;
 import com.dingzhang.model.Tag;
+import com.dingzhang.model.User;
 import com.dingzhang.service.EnterpriseService;
 import com.dingzhang.service.TagService;
 import com.dingzhang.util.DateUtil;
 import com.dingzhang.util.ImageUtil;
 import com.dingzhang.util.PageUtil;
+import com.dingzhang.util.QiniuUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static com.dingzhang.constants.Constants.QINIU_IMAGE_URL;
 import static com.dingzhang.constants.Constants.numofEveryPage;
 import static com.dingzhang.constants.Constants.uploadImageDir;
 
@@ -159,6 +163,7 @@ public class AdController {
         return modelAndView;
     }
 
+    //删除企业
     @RequestMapping("/deleteEnterprise/{id}/{allPages}/{currentPage}/{type}/{name}/{leader}/{member}/{level}/{deadline}/{tag}")
     public ModelAndView deleteEnterprise(@PathVariable("id") int id,
                                          @PathVariable(value="allPages") int allPages,
@@ -173,9 +178,14 @@ public class AdController {
         String src = "redirect:/ad/allEnterprises/"+allPages+"/"+currentPage+"/"+type+"/"+name+"/"+leader+"/"+member
                 + "/"+level+"/"+deadline+"/"+tag+".do";
         ModelAndView modelAndView = new ModelAndView(src);
+        EnterpriseWithBLOBs oldEnterprise = enterpriseService.getEnterprise(id);
 
         if(!enterpriseService.deleteEnterprise(id)){
             modelAndView.addObject("message",1);
+        }else{
+            QiniuUtil.deleteImage(oldEnterprise.getPhoto_boss());
+            QiniuUtil.deleteImage(oldEnterprise.getPhoto_leader());
+            QiniuUtil.deleteImage(oldEnterprise.getPhoto_member());
         }
         return modelAndView;
     }
@@ -197,13 +207,34 @@ public class AdController {
     public ModelAndView addEnterprisePost(HttpServletRequest request,EnterpriseWithBLOBs enterprise,
                                           MultipartFile file1,MultipartFile file2,MultipartFile file3,String deadday){
         ModelAndView modelAndView;
-        String path = request.getSession().getServletContext().getRealPath(uploadImageDir);
+
+        //获取登录用户以设置文件名
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute("LoginUser");
+        String fileName1 = getFileName("boss",loginUser.getId(),file1.getContentType());
+        String fileName2 = getFileName("leader",loginUser.getId(),file2.getContentType());
+        String fileName3= getFileName("member",loginUser.getId(),file3.getContentType());
 
         //设置企业的图片路径与日期
-        enterprise.setPhoto_boss(ImageUtil.uploadImage(path,file1));
-        enterprise.setPhoto_leader(ImageUtil.uploadImage(path,file2));
-        enterprise.setPhoto_member(ImageUtil.uploadImage(path,file3));
+        if(QiniuUtil.uploadImage(file1,fileName1)){
+            enterprise.setPhoto_boss(QINIU_IMAGE_URL+fileName1);
+        }
+        if(QiniuUtil.uploadImage(file2,fileName2)){
+            enterprise.setPhoto_leader(QINIU_IMAGE_URL+fileName2);
+        }
+        if(QiniuUtil.uploadImage(file3,fileName3)){
+            enterprise.setPhoto_member(QINIU_IMAGE_URL+fileName3);
+        }
         enterprise.setDeadline(DateUtil.stringConvertDate(deadday));
+
+        //将富文本编辑器里的图片上传到七牛云并替换src
+        String path = request.getSession().getServletContext().getRealPath("");
+        enterprise.setDescription(QiniuUtil.uploadHtmlImage(path,enterprise.getDescription()));
+        enterprise.setQuestion1(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion1()));
+        enterprise.setQuestion2(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion2()));
+        enterprise.setQuestion3(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion3()));
+        enterprise.setQuestion4(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion4()));
+        enterprise.setQuestion5(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion5()));
 
         if(enterpriseService.addEnterprise(enterprise)){
             modelAndView = new ModelAndView("redirect:/ad/allEnterprises/0/1/previous/1/1/1/0/1/-1.do");
@@ -247,41 +278,68 @@ public class AdController {
         return modelAndView;
     }
 
+    //修改文章
     @RequestMapping("/editEnterprisePost/{id}")
     public ModelAndView editEnterprisePost(@PathVariable("id")int id,
                                            HttpServletRequest request,EnterpriseWithBLOBs enterprise,
                                            MultipartFile file1,MultipartFile file2,MultipartFile file3,String deadday){
         ModelAndView modelAndView;
 
-        String path = request.getSession().getServletContext().getRealPath(uploadImageDir);
-        String deletePath = request.getSession().getServletContext().getRealPath("");
         EnterpriseWithBLOBs oldEnterprise = enterpriseService.getEnterprise(id);
         enterprise.setId(id);
+
+        //获取登录用户以设置文件名
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute("LoginUser");
+        String fileName1 = getFileName("boss",loginUser.getId(),file1.getContentType());
+        String fileName2 = getFileName("leader",loginUser.getId(),file2.getContentType());
+        String fileName3= getFileName("member",loginUser.getId(),file3.getContentType());
 
         if(file1.getSize()==0){
             enterprise.setPhoto_boss(oldEnterprise.getPhoto_boss());
         }else{
-            ImageUtil.deleteImage(deletePath+oldEnterprise.getPhoto_boss());
-            enterprise.setPhoto_boss(ImageUtil.uploadImage(path,file1));
+            QiniuUtil.deleteImage(oldEnterprise.getPhoto_boss());
+            if(QiniuUtil.uploadImage(file1,fileName1)){
+                enterprise.setPhoto_boss(QINIU_IMAGE_URL+fileName1);
+            }
         }
-
         if(file2.getSize()==0){
             enterprise.setPhoto_leader(oldEnterprise.getPhoto_leader());
         }else{
-            ImageUtil.deleteImage(deletePath+oldEnterprise.getPhoto_leader());
-            enterprise.setPhoto_leader(ImageUtil.uploadImage(path,file2));
+            QiniuUtil.deleteImage(oldEnterprise.getPhoto_leader());
+            if(QiniuUtil.uploadImage(file2,fileName2)){
+                enterprise.setPhoto_leader(QINIU_IMAGE_URL+fileName2);
+            }
         }
-
         if(file3.getSize()==0){
             enterprise.setPhoto_member(oldEnterprise.getPhoto_member());
         }else{
-            ImageUtil.deleteImage(deletePath+oldEnterprise.getPhoto_member());
-            enterprise.setPhoto_member(ImageUtil.uploadImage(path,file3));
+            QiniuUtil.deleteImage(oldEnterprise.getPhoto_member());
+            if(QiniuUtil.uploadImage(file3,fileName3)){
+                enterprise.setPhoto_member(QINIU_IMAGE_URL+fileName3);
+            }
         }
         enterprise.setDeadline(DateUtil.stringConvertDate(deadday));
 
+        //将富文本编辑器里的图片上传到七牛云并替换src
+        String path = request.getSession().getServletContext().getRealPath("");
+        enterprise.setDescription(QiniuUtil.uploadHtmlImage(path,enterprise.getDescription()));
+        enterprise.setQuestion1(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion1()));
+        enterprise.setQuestion2(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion2()));
+        enterprise.setQuestion3(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion3()));
+        enterprise.setQuestion4(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion4()));
+        enterprise.setQuestion5(QiniuUtil.uploadHtmlImage(path,enterprise.getQuestion5()));
+
         if(enterpriseService.editEnterprise(enterprise)){
             modelAndView = new ModelAndView("redirect:/ad/allEnterprises/0/1/previous/1/1/1/0/1/-1.do");
+
+            //删除无用的图片
+            QiniuUtil.deleteUnusedImage(oldEnterprise.getDescription(),enterprise.getDescription());
+            QiniuUtil.deleteUnusedImage(oldEnterprise.getQuestion1(),enterprise.getQuestion1());
+            QiniuUtil.deleteUnusedImage(oldEnterprise.getQuestion2(),enterprise.getQuestion2());
+            QiniuUtil.deleteUnusedImage(oldEnterprise.getQuestion3(),enterprise.getQuestion3());
+            QiniuUtil.deleteUnusedImage(oldEnterprise.getQuestion4(),enterprise.getQuestion4());
+            QiniuUtil.deleteUnusedImage(oldEnterprise.getQuestion5(),enterprise.getQuestion5());
         }
         else{
             modelAndView = new ModelAndView("editEnterprise");
@@ -300,4 +358,10 @@ public class AdController {
         return modelAndView;
     }
 
+
+    //生成图片名
+    public String getFileName(String man,int id,String contentType){
+        String type = contentType.substring(contentType.indexOf('/')+1,contentType.length());
+        return ""+id+"_"+DateUtil.dateToFileName()+"_"+man+"."+type;
+    }
 }
