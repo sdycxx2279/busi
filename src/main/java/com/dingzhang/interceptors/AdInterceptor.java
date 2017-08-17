@@ -1,4 +1,4 @@
-package com.dingzhang.intertceptors;
+package com.dingzhang.interceptors;
 
 import com.dingzhang.model.User;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -9,30 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 检查登录是否过期
  * @author Xiao Xu
- * @create 2017-08-04 17:44
+ * @create 2017-08-17 18:49
  **/
 
-public class LoginIntertceptor implements HandlerInterceptor {
-
-
+public class AdInterceptor implements HandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        HttpSession session = request.getSession();
+    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        HttpSession session = httpServletRequest.getSession();
         User user = (User) session.getAttribute("LoginUser");
-        if(user!=null){
-            //登陆成功的用户
+        if(user.getAd()==1){
+            //用户有管理员权限
             return true;
-        }else {
-            //没有登陆，转向登陆界面
-            java.io.PrintWriter out=response.getWriter();
-            out.println("<html>");
-            out.println("<script>");
-            String path=request.getContextPath() + "/login.do";
-            out.println("window.open('"+path+"','_top')");
-            out.println("</script>");
-            out.println("</html>");
+        }else{
+            //用户无管理员权限
+            httpServletRequest.getRequestDispatcher("/exceedAuthority.do").forward(httpServletRequest, httpServletResponse);
             return false;
         }
     }

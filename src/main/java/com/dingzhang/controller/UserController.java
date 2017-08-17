@@ -9,6 +9,9 @@ import com.dingzhang.service.EnterpriseService;
 import com.dingzhang.service.MenuService;
 import com.dingzhang.service.TagService;
 import com.dingzhang.service.UserService;
+import com.dingzhang.util.PageUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+
+import static com.dingzhang.constants.Constants.numofEveryPage;
 
 /**
  * @author Xiao Xu
@@ -89,14 +94,33 @@ public class UserController {
         return modelAndView;
     }
     //浏览企业概要
-    @RequestMapping("/allEnterprises/{name}/{leader}/{member}/{level}/{deadline}/{tag}")
-    ModelAndView getAllEnterprises(@PathVariable(value="name") String name,
+    @RequestMapping("/allEnterprises/{allPages}/{currentPage}/{type}/{name}/{leader}/{member}/{level}/{deadline}/{tag}")
+    ModelAndView getAllEnterprises(@PathVariable(value="allPages") int allPages,
+                                   @PathVariable(value="currentPage") int currentPage,
+                                   @PathVariable(value="type") String type,
+                                   @PathVariable(value="name") String name,
                                    @PathVariable(value="leader") String leader,
                                    @PathVariable(value="member") String member,
                                    @PathVariable(value="level") int level ,
                                    @PathVariable(value="deadline") String deadline,
                                    @PathVariable(value="tag") int tag){
         ModelAndView modelAndView = new ModelAndView("enterpriseMap");
+
+        currentPage = PageUtil.getCurrentPage(currentPage,allPages,type);
+
+        //获取并向页面传递用于分页列表的企业信息列表
+        Page page = PageHelper.startPage(currentPage, numofEveryPage, "id");
+        List<Enterprise> enterpriseList = enterpriseService.getEnterpriseList(name,leader,member,level,deadline,tag);
+        modelAndView.addObject("enterpriseList",enterpriseList);
+
+        //总页数
+        allPages = page.getPages();
+        modelAndView.addObject("allPages", allPages);
+        // 当前页码
+        currentPage = page.getPageNum();
+        modelAndView.addObject("currentPage", currentPage);
+        //每页表中项数，用于排序
+        modelAndView.addObject("numofEveryPage",numofEveryPage);
 
         //获取并向页面传递用于地图的企业信息列表
         List<Enterprise> enterprises = enterpriseService.getEnterpriseList(name,leader,member,level,deadline,tag);

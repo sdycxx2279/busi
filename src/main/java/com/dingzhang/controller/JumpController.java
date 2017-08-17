@@ -67,6 +67,11 @@ public class JumpController {
         return modelAndView;
     }
 
+    @RequestMapping("/exceedAuthority")
+    public String exceedAuthority() {
+        return "exceedAuthority";
+    }
+
     @RequestMapping("/test")
     public String test(HttpServletRequest request) {
         EnterpriseWithBLOBs enterpriseWithBLOBs = enterpriseService.getEnterprise(6);

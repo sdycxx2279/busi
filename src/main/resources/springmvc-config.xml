@@ -21,12 +21,20 @@
     <mvc:interceptors>
         <!-- 多个拦截器，顺序执行 -->
         <!-- 配置登陆拦截器 -->
-
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/login.do"/>
             <mvc:exclude-mapping path="/user/login.do"/>
-            <bean class="com.dingzhang.intertceptors.LoginIntertceptor"></bean>
+            <bean class="com.dingzhang.interceptors.LoginInterceptor"></bean>
+        </mvc:interceptor>
+        <!-- 配置权限拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/superad/**"/>
+            <bean class="com.dingzhang.interceptors.SuperAdInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/ad/**"/>
+            <bean class="com.dingzhang.interceptors.AdInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 
