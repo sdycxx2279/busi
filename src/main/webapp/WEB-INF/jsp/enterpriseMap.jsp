@@ -146,9 +146,9 @@
                                         <td>${item.leader}</td>
                                         <td>${item.member}</td>
                                         <td>
-                                            <c:forEach items="${typeList}" var="tag">
-                                                <c:if test="${tag.id==item.type}">
-                                                    <c:out value="${tag.name}"/>
+                                            <c:forEach items="${typeList}" var="type">
+                                                <c:if test="${type.id==item.type}">
+                                                    <c:out value="${type.name}"/>
                                                 </c:if>
                                             </c:forEach>
                                         </td>
@@ -253,6 +253,7 @@
     map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 
     var points = ${enterpriseMap};
+    var tagList = ${tagList};
     addMarker(points);
 
 
@@ -279,19 +280,34 @@
 
     //显示信息窗口，显示标注点的信息。
     function showInfo(thisMaker, point) {
+        var level;
+        var tag;
+        if(point.level==1){
+            level = "红色";
+        }else if(point.level==2){
+            level = "黄色";
+        }else{
+            level="绿色";
+        }
+        for (var i = 0, tagsLen = tagList.length; i < tagsLen; i++) {
+            if(point.type==tagList[i].id){
+                tag = tagList[i].name;
+                break;
+            }
+        }
+
         var sContent =
             '<ul style="margin:0 0 5px 0;padding:0.2em 0">'
             + '<li style="line-height: 26px;font-size: 15px;">'
-            + '<span style="width: 50px;display: inline-block;">单位名：</span>' + point.name + '</li>'
+            + '<span style="width: 100px;display: inline-block;">单位名：</span>' + point.name + '</li>'
             + '<li style="line-height: 26px;font-size: 15px;">'
-            + '<span style="width: 50px;display: inline-block;">类别：</span>' + point.type + '</li>'
+            + '<span style="width: 100px;display: inline-block;">类别：</span>' + tag + '</li>'
             + '<li style="line-height: 26px;font-size: 15px;">'
-            + '<span style="width: 50px;display: inline-block;">级别：</span>' + point.level + '</li>'
-            + '<li style="line-height: 26px;font-size: 15px;">'
-            + '<span style="width: 50px;display: inline-block;">截止日期：</span>' + point.deadline + '</li>'
-            + '<li style="line-height: 26px;font-size: 15px;"><span style="width: 50px;display: inline-block;">查看：</span><a href="ad/enterpriseInfo/' + point.id + '.do">详情</a></li>'
+            + '<span style="width: 100px;display: inline-block;">级别：</span>' + level + '</li>'
+            + '<li style="line-height: 26px;font-size: 15px;"><span style="width: 100px;display: inline-block;">查看：</span><a href="ad/enterpriseInfo/' + point.id + '.do">详情</a></li>'
             + '</ul>';
         var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
         thisMaker.openInfoWindow(infoWindow);   //图片加载完毕重绘infowindow
     }
+
 </script>

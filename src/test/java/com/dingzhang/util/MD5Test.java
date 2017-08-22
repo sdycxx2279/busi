@@ -2,6 +2,7 @@ package com.dingzhang.util;
 
 import com.dingzhang.BaseTest;
 import com.dingzhang.dao.EnterpriseDao;
+import com.dingzhang.model.EnterpriseExample;
 import com.dingzhang.model.EnterpriseWithBLOBs;
 import com.dingzhang.util.MD5Util;
 import org.jsoup.Jsoup;
@@ -12,6 +13,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 import static com.dingzhang.constants.Constants.QINIU_IMAGE_URL;
 
@@ -21,13 +23,13 @@ import static com.dingzhang.constants.Constants.QINIU_IMAGE_URL;
  **/
 
 public class MD5Test extends BaseTest{
+
     @Test
     public void testAdd() throws Exception {
-        String html = "<p>qq</p><p>ww</p>";
-
-        Document doc = Jsoup.parseBodyFragment(html);
-
-        doc.outputSettings().prettyPrint(false);
-        System.out.println(doc.body().html());
+        String randomName="";
+        for(int i = 0;i < 6;i++){
+            randomName += (int)(Math.random()*(10-1+1));
+        }
+        System.out.println(randomName);
     }
 }

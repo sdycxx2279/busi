@@ -361,7 +361,11 @@ public class AdController {
 
     //生成图片名
     public String getFileName(String man,int id,String contentType){
+        String randomName="";
+        for(int i = 0;i < 6;i++){
+            randomName += (int)(Math.random()*(10-1+1));
+        }
         String type = contentType.substring(contentType.indexOf('/')+1,contentType.length());
-        return ""+id+"_"+DateUtil.dateToFileName()+"_"+man+"."+type;
+        return ""+id+"_"+DateUtil.dateToFileName()+"_"+man+"_"+randomName+"."+type;
     }
 }

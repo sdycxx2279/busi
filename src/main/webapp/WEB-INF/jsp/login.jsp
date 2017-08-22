@@ -19,9 +19,6 @@
     <title>登录</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-
     <!-- CSS Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/material-kit.css" rel="stylesheet"/>
@@ -44,14 +41,14 @@
 
                             <div class="input-group">
 										<span class="input-group-addon">
-											<i class="material-icons">email</i>
+											账号：
 										</span>
                                 <input type="text" name="username" class="form-control" placeholder="账号">
                             </div>
 
                             <div class="input-group">
 										<span class="input-group-addon">
-											<i class="material-icons">lock_outline</i>
+											密码：
 										</span>
                                 <input type="password" name="password" placeholder="密码" class="form-control" />
                             </div>

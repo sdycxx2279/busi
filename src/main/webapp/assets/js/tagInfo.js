@@ -21,7 +21,7 @@ function dividePage(allPages, currentPage, flag) {
 /**
  * 对输入进行校验
  */
-function searchByuserName(){
+function addTag(){
     var name = $("#name").val();
 
     if (name == null || name == "") {

@@ -129,6 +129,7 @@ public class UserController {
         //获取所有类别信息
         List<Tag> typeList = tagService.getTagList();
         modelAndView.addObject("typeList",typeList);
+        modelAndView.addObject("tagList",JSON.toJSON(typeList).toString());
 
         //获取参数信息
         if (!name.equals("1")) {

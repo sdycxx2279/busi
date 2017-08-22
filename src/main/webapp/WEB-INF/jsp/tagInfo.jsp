@@ -57,7 +57,7 @@
                         </h4>
                         <div class="hr hr-18 dotted hr-double"></div>
                         <div class="nav-search" id="nav-search">
-                            <form class="form-search" action="/ad/addTag.do">
+                            <form class="form-search" action="/ad/addTag.do" onsubmit="return addTag()">
                                 <span class="span_margin">新增企业类别：</span></span><span class="input-icon">
 									<input type="text" class="nav-search-input" id="name" name="name"/>
 									<i class="icon-search nav-search-icon"></i>

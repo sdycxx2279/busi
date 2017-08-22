@@ -127,7 +127,7 @@
                         <div class="profile-info-row">
                             <div class="profile-info-name">单位负责人照片</div>
                             <div class="profile-info-value">
-                                <div style="width:50px;height:100px">
+                                <div style="width:100px;height:160px">
                                     <img style="width:100%;height:100%" src="${enterprise.photo_boss}">
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                         <div class="profile-info-row">
                             <div class="profile-info-name">网格长照片</div>
                             <div class="profile-info-value">
-                                <div style="width:50px;height:100px">
+                                <div style="width:100px;height:160px">
                                     <img style="width:100%;height:100%" src="${enterprise.photo_leader}">
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
                         <div class="profile-info-row">
                             <div class="profile-info-name">网格员照片</div>
                             <div class="profile-info-value">
-                                <div style="width:50px;height:100px">
+                                <div style="width:100px;height:160px">
                                     <img style="width:100%;height:100%" src="${enterprise.photo_member}">
                                 </div>
                             </div>

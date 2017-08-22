@@ -18,11 +18,11 @@ public class AdInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         HttpSession session = httpServletRequest.getSession();
         User user = (User) session.getAttribute("LoginUser");
-        if(user.getAd()==1){
-            //用户有管理员权限
+        if(user.getAd()==1||user.getAd()==2){
+            //用户有管理员权限或超管权限
             return true;
         }else{
-            //用户无管理员权限
+            //用户无管理员权限或超管权限
             httpServletRequest.getRequestDispatcher("/exceedAuthority.do").forward(httpServletRequest, httpServletResponse);
             return false;
         }
